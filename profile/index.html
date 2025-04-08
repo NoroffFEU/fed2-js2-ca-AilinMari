@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,14 +8,22 @@
     <script type="module" src="/src/app.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
     <style>
-     @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-     @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-   </style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
   </head>
   <body>
     <h1>Profile</h1>
 
     <form name="updateProfile">
+      <div>
+        <label for="avatar">Avatar URL</label>
+        <input id="avatar" type="url" name="avatar" />
+      </div>
+      <div>
+        <label for="banner">Banner URL</label>
+        <input id="banner" type="url" name="banner" />
+      </div>
       <button>Update Profile</button>
     </form>
   </body>

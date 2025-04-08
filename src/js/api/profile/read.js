@@ -4,7 +4,7 @@ import { headers } from "../headers";
 export async function readProfile(username) {
   try {
     const response = await fetch(`${API_SOCIAL_PROFILES}/${username}`, {
-      headers: headers(),
+      headers: headers(), // Use headers with API key
     });
     if (!response.ok) {
       throw new Error("Failed to fetch profile");

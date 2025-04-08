@@ -9,6 +9,9 @@ form.addEventListener("submit", async (event) => {
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
+    bio: formData.get("bio") || "", // Optional field
+    banner: formData.get("banner") || "", // Optional field
+    avatar: formData.get("avatar") || "", // Optional field
   };
   await onRegister(userData);
 });

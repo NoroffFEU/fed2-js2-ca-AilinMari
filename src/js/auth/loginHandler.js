@@ -1,19 +1,28 @@
-import { login } from "../api/auth/login.js";
+import { youStoryApi } from "../api/apiClient.js";
+
+const apiClient = new youStoryApi();
 
 document
   .querySelector("form[name='login']")
   .addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
 
     try {
-      const userData = await login({ email, password });
+      const data = await apiClient.login(email, password); // Use youStoryApi's login method
+      localStorage.setItem("token", data.accessToken);
       alert("Login successful!");
-      // Redirect to another page or perform additional actions
-      window.location.href = "/dashboard"; // Example redirect
+
+      // Fetch and log arrays for the logged-in user
+      const blogPosts = await apiClient.getBlogposts();
+      console.log(`Blog posts for user ${email}:`, blogPosts);
+
+    //   window.location.href = "/feed";
     } catch (error) {
-      alert("Login failed. Please check your credentials.");
+      alert(
+        error.message || "Login failed. Please check your username or password."
+      );
     }
   });
