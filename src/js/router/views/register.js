@@ -15,3 +15,4 @@ form.addEventListener("submit", async (event) => {
   };
   await onRegister(userData);
 });
+

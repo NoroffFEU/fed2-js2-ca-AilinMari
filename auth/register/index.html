@@ -1,22 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/api/auth/register.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
     <style>
-     @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-     @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-   </style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
   </head>
 
   <body>
     <h1>Register</h1>
 
-    <form name="register">
+    <form name="register" class="register-form">
       <div>
         <label for="name">Name</label>
         <input
@@ -54,7 +54,8 @@
       </div>
 
       <a href="/auth/login/">Login</a>
-      <button>Register</button>
+      <button type="submit">Register</button>
+      <p class="registerFailed"></p>
     </form>
   </body>
 </html>

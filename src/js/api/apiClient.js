@@ -213,30 +213,4 @@ export class youStoryApi {
     );
     return data;
   }
-
-  /**
-   * Registers a new user.
-   * @param {string} name - The user's name.
-   * @param {string} email - The user's email.
-   * @param {string} password - The user's password.
-   * @returns {Promise<any>} Registration data.
-   */
-  async register(name, email, password) {
-    const body = { name, email, password };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
-      },
-      body: JSON.stringify(body),
-    };
-
-    const { data } = await this._request(
-      `${this.authUrl}/register`,
-      options,
-      "Registration failed"
-    );
-    return data;
-  }
 }
