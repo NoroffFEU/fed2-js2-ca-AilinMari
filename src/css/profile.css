@@ -1,0 +1,13 @@
+.thumbnail-grid img {
+  max-width: 100%;
+  height: auto;
+}
+
+.thumbnail-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.container a {
+cursor: pointer;
+}

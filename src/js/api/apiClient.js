@@ -74,6 +74,7 @@ export class youStoryApi {
    * @returns {Promise<any>} An array of blog posts.
    */
   async getBlogposts() {
+    console.log("Fetching blog posts from:", this.blogUrl); // Debugging API URL
     const { data } = await this._request(
       this.blogUrl,
       {},
