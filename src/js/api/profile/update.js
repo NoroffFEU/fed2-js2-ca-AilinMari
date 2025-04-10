@@ -11,7 +11,13 @@ export async function updateProfile(username, { avatar, banner }) {
     if (!response.ok) {
       throw new Error("Failed to update profile");
     }
-    return await response.json();
+
+    const updatedProfile = await response.json();
+
+    // Update localStorage with new avatar
+    localStorage.setItem("avatar", updatedProfile.avatar);
+
+    return updatedProfile;
   } catch (error) {
     console.error(error);
     throw error;

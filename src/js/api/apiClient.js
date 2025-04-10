@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "./constants.js"; // Import API_BASE_URL
+import { API_SOCIAL_PROFILES } from "./constants.js";
 
 /**
  * Custom error class for handling authentication errors.
@@ -212,6 +213,32 @@ export class youStoryApi {
       options,
       "Login failed"
     );
+
+    // Store user data in localStorage
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("avatar", data.avatar);
+
     return data;
+  }
+
+  /**
+   * Fetches the logged-in user's profile information.
+   * @returns {Promise<any>} The user's profile data.
+   */
+  async getUserProfile() {
+    const username = this.getBlogName(); // Get the logged-in user's name
+    const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
+
+    try {
+      const profileData = await this._request(
+        url,
+        {},
+        "Error fetching user profile"
+      );
+      return profileData;
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      throw error;
+    }
   }
 }
