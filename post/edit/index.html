@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,9 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <script type="module" src="/src/js/auth/logoutHandler.js"></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
   </head>
 
   <body>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links">
+        <a href="/profile/">My Profile</a>
+        <a href="/auth/login/">Login</a>
+        <a href="/auth/register/">Register</a>
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+      </div>
+    </nav>
     <h1>Edit Post</h1>
 
     <form name="editPost">

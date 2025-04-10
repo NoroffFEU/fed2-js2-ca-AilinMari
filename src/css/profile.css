@@ -1,13 +1,50 @@
 .thumbnail-grid img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 1000px;
   height: auto;
+  border-radius: 0.5rem;
 }
 
 .thumbnail-grid {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.container a {
-cursor: pointer;
+#profileInfo img {
+  border-radius: 50%;
+  max-width: 15rem;
+  border: solid 0.5rem pink;
+  box-shadow: black 0px 0px 10px;
 }
+
+.profile-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: black;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: black;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+}
+
+.container {
+  margin: 5rem 0 0 0;
+};

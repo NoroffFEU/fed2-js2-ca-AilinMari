@@ -14,8 +14,9 @@ export async function updateProfile(username, { avatar, banner }) {
 
     const updatedProfile = await response.json();
 
-    // Update localStorage with new avatar
+    // Update localStorage with new avatar and banner
     localStorage.setItem("avatar", updatedProfile.avatar);
+    localStorage.setItem("banner", updatedProfile.banner);
 
     return updatedProfile;
   } catch (error) {

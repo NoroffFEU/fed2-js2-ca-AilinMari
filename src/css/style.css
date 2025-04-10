@@ -82,26 +82,34 @@ button:active {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-bottom: rem;
+  z-index: 1100; /* Ensure the hamburger button stays above the nav-links */
+  position: relative; /* Ensure z-index works */
 }
 
 .nav-links {
-  display: none; 
+  display: none;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-}
-
-.nav-links a,
-.nav-links button {
-  text-align: left;
+  position: absolute; /* Position the menu absolutely */
+  top: 3rem; /* Align it to the top */
+  left: 0; /* Align it to the left */
+  background-color: white; /* Add a background color to overlay content */
+  z-index: 1000; /* Ensure it appears above other content but below the hamburger */
+  padding: 1rem; /* Add padding for spacing */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
 }
 
 .nav-links.active {
-  display: flex; 
+  display: flex;
 }
 
+.nav-links.active {
+  display: flex; /* Show the menu when active */
+}
 
+/* Adjustments for mobile view */
 @media (max-width: 768px) {
   body {
     margin: 2rem;
@@ -143,5 +151,9 @@ button:active {
   main {
     margin-top: 2rem;
     width: 100%;
+  }
+
+  .nav-links {
+    align-items: flex-start;
   }
 }

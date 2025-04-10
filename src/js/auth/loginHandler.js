@@ -20,7 +20,7 @@ document
       const blogPosts = await apiClient.getBlogposts();
       console.log(`Blog posts for user ${data.name}:`, blogPosts);
 
-      // window.location.href = "/index.html"; // Redirect to the main page after successful login
+      window.location.href = "/profile/index.html"; // Redirect to the main page after successful login
     } catch (error) {
       alert(
         error.message || "Login failed. Please check your username or password."

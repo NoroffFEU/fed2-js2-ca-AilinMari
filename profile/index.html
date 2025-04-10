@@ -9,6 +9,8 @@
 
     <script type="module" src="/src/js/api/profile/logedin.js"></script>
     <script type="module" src="/src/js/api/profile/update.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <script type="module" src="/src/js/auth/logoutHandler.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/profile.css" />
     <style>
@@ -17,11 +19,21 @@
     </style>
   </head>
   <body>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links">
+        <a href="/profile/">My Profile</a>
+        <a href="/auth/login/">Login</a>
+        <a href="/auth/register/">Register</a>
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+      </div>
+    </nav>
+    <main>
     <h1>Profile</h1>
 
-    <div id="profileInfo">
-      <!-- User's name and avatar will be dynamically rendered here -->
-    </div>
+    <div id="profileInfo"></div>
 
     <form name="updateProfile">
       <div>
@@ -34,8 +46,6 @@
       </div>
       <button>Update Profile</button>
     </form>
-    <div id="profileFeed">
-      <!-- Posts will be dynamically rendered here -->
-    </div>
+    <div id="profileFeed"></div></main>
   </body>
 </html>

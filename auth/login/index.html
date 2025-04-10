@@ -12,9 +12,22 @@
       @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
     </style>
     <script type="module" src="/src/js/auth/loginHandler.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <script type="module" src="/src/js/auth/logoutHandler.js"></script>
   </head>
 
   <body>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links">
+        <a href="/profile/">My Profile</a>
+        <a href="/auth/login/">Login</a>
+        <a href="/auth/register/">Register</a>
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+      </div>
+    </nav>
     <h1>Login</h1>
     <form name="login">
       <div>
