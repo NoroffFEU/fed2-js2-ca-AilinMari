@@ -55,7 +55,7 @@ export class youStoryApi {
    */
   getBlogName() {
     const loggedInUserName = localStorage.getItem("name");
-    return loggedInUserName ? loggedInUserName : "ailin_user";
+    return loggedInUserName ? loggedInUserName : "name";
   }
 
   /**

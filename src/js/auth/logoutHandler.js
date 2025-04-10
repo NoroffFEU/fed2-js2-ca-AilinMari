@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Clear user data from local storage
         localStorage.removeItem("token");
         localStorage.removeItem("name");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("result");
 
         // Redirect to the login page
         window.location.href = "/auth/login/";
