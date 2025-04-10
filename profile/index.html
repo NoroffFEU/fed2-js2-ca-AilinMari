@@ -11,6 +11,10 @@
     <script type="module" src="/src/js/api/profile/update.js"></script>
     <script type="module" src="/src/js/auth/navHandler.js"></script>
     <script type="module" src="/src/js/auth/logoutHandler.js"></script>
+    <script type="module" src="/src/js/ui/profile/update.js"></script>
+    <script type="module" src="/src/js/api/constants.js"></script>
+    <script type="module" src="/src/js/api/headers.js"></script>
+    <script type="module" src="/src/js/api/apiClient.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/profile.css" />
     <style>
@@ -31,21 +35,22 @@
       </div>
     </nav>
     <main>
-    <h1>Profile</h1>
+      <h1>Profile</h1>
 
-    <div id="profileInfo"></div>
+      <div id="profileInfo"></div>
 
-    <form name="updateProfile">
-      <div>
-        <label for="avatar">Avatar URL</label>
-        <input id="avatar" type="url" name="avatar" />
-      </div>
-      <div>
-        <label for="banner">Banner URL</label>
-        <input id="banner" type="url" name="banner" />
-      </div>
-      <button>Update Profile</button>
-    </form>
-    <div id="profileFeed"></div></main>
+      <form id="updateProfileForm" name="updateProfile">
+        <div>
+          <label for="avatar">Avatar URL</label>
+          <input id="avatar" type="url" name="avatar" />
+        </div>
+        <div>
+          <label for="banner">Banner URL</label>
+          <input id="banner" type="url" name="banner" />
+        </div>
+        <button type="submit">Update Profile</button>
+      </form>
+      <div id="profileFeed"></div>
+    </main>
   </body>
 </html>

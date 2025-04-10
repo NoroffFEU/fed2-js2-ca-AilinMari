@@ -241,4 +241,28 @@ export class youStoryApi {
       throw error;
     }
   }
+
+  /**
+   * Updates the logged-in user's profile (avatar and banner).
+   * @param {string} avatar - The new avatar URL.
+   * @param {string} banner - The new banner URL.
+   * @returns {Promise<any>} The updated profile data.
+   */
+  async updateUserProfile(avatar, banner) {
+    const username = this.getBlogName(); // Get the logged-in user's name
+    const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
+    const accessToken = this._getRequiredAccessToken();
+
+    const data = { avatar, banner };
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(data),
+    };
+
+    return await this._request(url, options, "Error updating user profile");
+  }
 }

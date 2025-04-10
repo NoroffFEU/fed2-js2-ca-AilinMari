@@ -1,27 +1,41 @@
-export async function onUpdateProfile(avatar) {
-    const username = localStorage.getItem("name"); // Get the logged-in user's name from localStorage
-    const banner = localStorage.getItem("banner"); // Get the banner from localStorage
-    
-    try {
-        const response = await fetch(`${API_SOCIAL_PROFILES}/${username}`, {
-        method: "PUT",
-        headers: headers(),
-        body: JSON.stringify({ avatar, banner }),
-        });
-    
-        if (!response.ok) {
-        throw new Error("Failed to update profile");
-        }
-    
-        const updatedProfile = await response.json();
-    
-        // Update localStorage with new avatar and banner
-        localStorage.setItem("avatar", updatedProfile.avatar);
-        localStorage.setItem("banner", updatedProfile.banner);
-    
-        return updatedProfile;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+import { youStoryApi } from "../../api/apiClient.js"; // Correct relative path
+import { API_SOCIAL_PROFILES } from "../../api/constants.js"; // Correct relative path
+import { headers } from "../../api/headers.js";
+
+const apiClient = new youStoryApi();
+
+export async function onUpdateProfile(avatar, banner) {
+  try {
+    const updatedProfile = await apiClient.updateUserProfile(avatar, banner);
+
+    // Update localStorage with new avatar and banner
+    localStorage.setItem("avatar", updatedProfile.avatar.url);
+    localStorage.setItem("banner", updatedProfile.banner.url);
+
+    return updatedProfile;
+  } catch (error) {
+    console.error("Failed to update profile:", error);
+    throw error;
+  }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("updateProfileForm");
+
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const avatar = form.avatar.value.trim();
+      const banner = form.banner.value.trim();
+
+      try {
+        const updatedProfile = await onUpdateProfile(avatar, banner);
+        console.log("Profile updated successfully:", updatedProfile);
+        alert("Profile updated successfully!");
+      } catch (error) {
+        alert("Failed to update profile. Please try again.");
+      }
+    });
+  }
+});
