@@ -1,4 +1,6 @@
-import { API_AUTH_LOGIN } from "../constants.js";
+import { API_AUTH_LOGIN, API_KEY } from "../constants.js";
+import { readPost } from "../post/read.js";
+
 
 /**
  * Logs in a user by sending their credentials to the API.
@@ -7,6 +9,8 @@ import { API_AUTH_LOGIN } from "../constants.js";
  * @param {string} credentials.password - The user's password.
  * @returns {Promise<Object>} The response data containing the access token.
  */
+console.log(readPost(8032));
+
 export async function login({ email, password }) {
   try {
     console.log("Sending login request to:", API_AUTH_LOGIN); // Debugging log
@@ -14,7 +18,11 @@ export async function login({ email, password }) {
 
     const response = await fetch(API_AUTH_LOGIN, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+        accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "X-Noroff-API-Key": `${API_KEY}`,
+       },
       body: JSON.stringify({ email, password }),
     });
 
@@ -35,4 +43,5 @@ export async function login({ email, password }) {
     console.error("Error during login:", error.message);
     throw error;
   }
+  
 }

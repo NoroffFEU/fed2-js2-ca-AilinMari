@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./constants.js"; // Import API_BASE_URL
+import { API_BASE_URL , API_AUTH } from "./constants.js"; // Import API_BASE_URL
 import { API_SOCIAL_PROFILES } from "./constants.js";
 
 /**
@@ -14,8 +14,8 @@ export class AuthError extends Error {
 export class youStoryApi {
   constructor() {
     this.blogName = this.getBlogName();
-    this.blogUrl = `${API_BASE_URL}/blog/posts/${this.blogName}`;
-    this.authUrl = `${API_BASE_URL}/auth`;
+    this.blogUrl = `${API_SOCIAL_PROFILES}/${this.blogName}/posts`;
+    this.authUrl = `${API_AUTH}`;
   }
 
   /**
@@ -56,7 +56,7 @@ export class youStoryApi {
    */
   getBlogName() {
     const loggedInUserName = localStorage.getItem("name");
-    return loggedInUserName ? loggedInUserName : "name";
+    return loggedInUserName ? loggedInUserName : "ailin_user";
   }
 
   /**

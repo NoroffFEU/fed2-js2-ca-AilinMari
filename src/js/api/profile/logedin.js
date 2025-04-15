@@ -1,21 +1,25 @@
 import { youStoryApi } from "../apiClient.js";
 let youstoryApi = new youStoryApi();
 
-async function getBlogpost() {
-  try {
-    const accessToken = localStorage.getItem("token");
-    if (!accessToken) {
-      console.error("User is not logged in. Posts will not be displayed.");
-      return; // Exit if the user is not logged in
-    }
+// async function getBlogpost() {
+//   try {
+//     const accessToken = localStorage.getItem("token");
+//     if (!accessToken) {
+//       console.error("User is not logged in. Posts will not be displayed.");
+//       return; // Exit if the user is not logged in
+//     }
 
-    let blogposts = await youstoryApi.getBlogposts();
-    renderBlogposts(blogposts);
-    renderProfileInfo(blogposts[0]); // Assuming the first post's author is the logged-in user
-  } catch (error) {
-    console.error("Error fetching blogposts", error);
-  }
-}
+//     let blogposts = await youstoryApi.getBlogposts();
+//     renderBlogposts(blogposts);
+//     renderProfileInfo(blogposts[0]); // Assuming the first post's author is the logged-in user
+//   } catch (error) {
+//     console.error("Error fetching blogposts", error);
+//   }
+// }
+
+import { readPostsByUser } from "../post/read.js";
+
+console.log(readPostsByUser);
 
 function renderProfileInfo(author) {
   const profileInfo = document.getElementById("profileInfo");
