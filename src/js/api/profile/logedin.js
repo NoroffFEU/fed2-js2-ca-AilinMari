@@ -1,30 +1,50 @@
 import { youStoryApi } from '../apiClient.js';
 import { readPostsByUser } from '../post/read.js';
 
-let youstoryApi = new youStoryApi();
+let apiClient = new youStoryApi();
 
-// async function getBlogpost() {
-//   try {
-//     const accessToken = localStorage.getItem("token");
-//     if (!accessToken) {
-//       console.error("User is not logged in. Posts will not be displayed.");
-//       return; // Exit if the user is not logged in
-//     }
+async function getBlogposts() {
+  try {
+    const accessToken = localStorage.getItem("token");
+    if (!accessToken) {
+      console.error("User is not logged in. Posts will not be displayed.");
+      return; // Exit if the user is not logged in
+    }
 
-//     let blogposts = await youstoryApi.getBlogposts();
-//     renderBlogposts(blogposts);
-//     renderProfileInfo(blogposts[0]); // Assuming the first post's author is the logged-in user
-//   } catch (error) {
-//     console.error("Error fetching blogposts", error);
-//   }
-// }
-
-async function testFunction() {
-  const posts = await readPostsByUser('testusername101@stud.noroff.no');
-  renderBlogposts(posts.data);
+    let blogposts = await youstoryApi.getBlogposts();
+    getBlogposts(blogposts);
+    renderProfileInfo(data.name); // Assuming the first post's author is the logged-in user
+  } catch (error) {
+    console.error("Error fetching blogposts", error);
+  }
 }
 
-testFunction();
+const author = await apiClient.getBlogName();
+console.log(`Author name: ${author}`); // Debugging log
+      const blogPosts = await apiClient.getBlogposts();
+      console.log(`Blog posts for user :${author}`, blogPosts);
+
+// async function testFunction() {
+//   const posts = await readPostsByUser('tetud.noroff.no';
+//   renderBlogposts(posts.data);
+// }
+
+// testFunction();
+// let readPostsByUser = await youstoryApi.readPostsByUser()
+
+//   .then((response) => {
+//     console.log('Response from readPostsByUser:', response); // Debugging log
+//     return response.data; // Assuming the API returns an object with a data property
+//   }
+//   .catch((error) => {
+//     console.error('Error fetching posts by user:', error); // Debugging log
+//     return []; // Return an empty array in case of error
+//   }
+//   );
+// console.log('Posts by user:', readPostsByUser); // Debugging log
+// console.log(readPostsByUser.data); // Debugging log
+// console.log(readPostsByUser.data[0]); // Debugging log
+// console.log(readPostsByUser.data[0].author); // Debugging log
 
 function renderProfileInfo(author) {
   const profileInfo = document.getElementById('profileInfo');
@@ -55,6 +75,9 @@ function renderProfileInfo(author) {
   profileInfoContainer.appendChild(authorAvatar);
   profileInfoContainer.appendChild(authorName);
 }
+
+// renderProfileInfo ();
+
 function renderBlogposts(posts) {
   const thumbnailGrid = document.getElementById('profileFeed');
   thumbnailGrid.className = 'thumbnail-grid';

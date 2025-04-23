@@ -1,4 +1,5 @@
 import { youStoryApi } from "../api/apiClient.js";
+import { API_KEY } from "../api/constants.js";
 
 const apiClient = new youStoryApi();
 
@@ -14,6 +15,7 @@ document
       const data = await apiClient.login(email, password); // Use youStoryApi's login method
       localStorage.setItem("token", data.accessToken);
       localStorage.setItem("name", data.name); // Store the logged-in user's name
+
       alert("Login successful!");
 
       // Fetch and log arrays for the logged-in user

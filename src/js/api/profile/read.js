@@ -1,10 +1,10 @@
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 
-export async function readProfile(username) {
+export async function readProfile(name) {
   try {
-    const response = await fetch(`${API_SOCIAL_PROFILES}/${username}`, {
-      headers: headers(), // Use headers with API key
+    const response = await fetch(`${API_SOCIAL_PROFILES}/${name}`, {
+      headers: headers(),
     });
     if (!response.ok) {
       throw new Error("Failed to fetch profile");

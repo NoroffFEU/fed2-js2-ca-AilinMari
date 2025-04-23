@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("name");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("result");
+        localStorage.removeItem("apiKey");
+        localStorage.removeItem("avatar");
 
         // Redirect to the login page
         window.location.href = "/auth/login/";
