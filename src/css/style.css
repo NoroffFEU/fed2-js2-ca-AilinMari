@@ -4,15 +4,20 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 5rem 10rem;
+  background-color: #000;
+  color: pink;
+  /* margin: 5rem 10rem; */
 }
 
+/* Make the main content area grow to fill the available space */
 main {
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 .noroff-logo img {
@@ -22,13 +27,20 @@ main {
 
 h1 {
   font-size: 4rem;
-  font-weight: 600;
+  font-weight: 400;
   font-family: "Raleway", sans-serif;
+}
+
+.or {
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  margin: 1rem 0;
 }
 
 nav a {
   text-decoration: none;
-  color: #000;
+  color: pink;
   font-size: 1.2rem;
   padding: 0.5rem;
   font-family: "IBM plex Sans Condensed";
@@ -54,51 +66,95 @@ nav {
 
 button {
   background-color: white;
-  border: none;
+  /* border: none; */
   color: #000;
   font-size: 1.2rem;
   font-weight: 600;
   font-family: "Raleway", sans-serif;
   cursor: pointer;
   padding: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 15rem;
 }
 
 button:hover {
-  color: pink;
-  /* box-shadow: inset 1px 1px 3px #000; */
-  text-shadow: #000 2px 2px 3px;
-  border: none;
+  background-color: pink;
+  box-shadow: inset 1px 1px 3px #000;
+  box-shadow: 0px 3px 4px #000;
 }
 
 button:active {
-  text-shadow: 3px 3px 6px #000;
-  /* box-shadow: inset 2px 2px 5px #000; */
-  border: none;
-  color: #000;
+  box-shadow: inset 0px 3px 4px #000;
+  background-color: pink;
 }
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid pink;
+  border-radius: 4px;
+  max-width: 15rem;
+}
+form label {
+  font-size: 1.2rem;
+  font-family: "IBM plex Sans Condensed", sans-serif;
+  padding: 0 0 0.5rem 0;
+}
+
+/* #updateProfileForm button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: pink;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#updateProfileForm button :hover {
+box-shadow: 0px 4px 6px #000;/* Lighter pink on hover */
+/* } */
+/* 
+#updateProfileForm button :active {
+box-shadow: inset 0px 4px 6px #000;
+padding: 0.5rem;
+} */
 
 .hamburger {
   background: none;
   border: none;
+  color: pink;
   font-size: 2rem;
   cursor: pointer;
   margin-bottom: rem;
   z-index: 1100; /* Ensure the hamburger button stays above the nav-links */
   position: relative; /* Ensure z-index works */
+  width: fit-content;
+}
+
+.hamburger:active {
+  background-color: black;
+  border: none;
+  width: fit-content;
+  box-shadow: none;
+  text-shadow: 0px 2px 4px pink;
+  color: pink;
 }
 
 .nav-links {
   display: none;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   gap: 1rem;
   width: 100%;
   position: absolute; /* Position the menu absolutely */
   top: 3rem; /* Align it to the top */
   left: 0; /* Align it to the left */
-  background-color: white; /* Add a background color to overlay content */
+  background-color: black; /* Add a background color to overlay content */
   z-index: 1000; /* Ensure it appears above other content but below the hamburger */
   padding: 1rem; /* Add padding for spacing */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
 }
 
 .nav-links.active {
@@ -109,12 +165,59 @@ button:active {
   display: flex; /* Show the menu when active */
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+form a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  font-family: "IBM plex Sans Condensed";
+}
+form a:hover {
+  color: pink;
+  text-shadow: #000 2px 2px 3px;
+  border-radius: 5px;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #000000; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: pink;
+  font-family: "IBM plex Sans Condensed", sans-serif;
+  font-size: 1rem;
+margin: 5rem 0 0 0;
+box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+}
+
 /* Adjustments for mobile view */
 @media (max-width: 768px) {
   body {
-    margin: 2rem;
-    flex-direction: column;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+   height: fit-content;
   }
 
   h1 {
@@ -156,4 +259,6 @@ button:active {
   .nav-links {
     align-items: flex-start;
   }
+
+
 }

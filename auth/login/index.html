@@ -23,6 +23,7 @@
         <a href="/profile/">My Profile</a>
         <a href="/auth/login/">Login</a>
         <a href="/auth/register/">Register</a>
+        <a href="/index.html">Home</a>
         <div id="logout">
           <button>Logout</button>
         </div>
@@ -30,18 +31,25 @@
     </nav>
     <h1>Login</h1>
     <form name="login">
-      <div>
+      <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" name="email" required />
       </div>
 
-      <div>
+      <div class="form-group">
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required />
       </div>
 
-      <a href="/auth/register/">Register</a>
       <button>Login</button>
+      <p class="or">or</p>
+      <a href="/auth/register/">Register</a>
     </form>
+    <footer>
+      <div id="footer-content">
+        <p>© 2023 Youstory. All rights reserved.</p>
+        <p>Made with ❤️ by Noroff student</p>
+      </div>
+    </footer>
   </body>
 </html>
