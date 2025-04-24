@@ -43,10 +43,12 @@ align-items: center;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  margin: 0 1rem 0 0;
 }
 
 .followers-postst-count p {
-/* gap: 1rem; */
+font-family: 'Raleway', sans-serif;
+font-size: 0.8rem;
 }
 
 h1 {
@@ -57,16 +59,7 @@ h1 {
   margin: 0;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-  /* color: black; */
-  text-transform: uppercase;
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-}
+
 
 /* .container {
   margin: 5rem 0 0 0;
