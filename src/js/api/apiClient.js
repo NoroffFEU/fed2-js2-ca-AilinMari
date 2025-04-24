@@ -110,7 +110,7 @@ async getAllBlogposts() {
   };
 
   const { data } = await this._request(
-    API_SOCIAL_POSTS,
+    API_SOCIAL_POSTS + `/?_author=true`,
     options,
     'Error fetching blogposts',
   );
