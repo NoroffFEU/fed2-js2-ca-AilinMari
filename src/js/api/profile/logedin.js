@@ -5,9 +5,9 @@ let apiClient = new youStoryApi();
 
 async function getBlogposts() {
   try {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = localStorage.getItem('token');
     if (!accessToken) {
-      console.error("User is not logged in. Posts will not be displayed.");
+      console.error('User is not logged in. Posts will not be displayed.');
       return; // Exit if the user is not logged in
     }
 
@@ -15,14 +15,14 @@ async function getBlogposts() {
     getBlogposts(blogposts);
     renderProfileInfo(data.name); // Assuming the first post's author is the logged-in user
   } catch (error) {
-    console.error("Error fetching blogposts", error);
+    console.error('Error fetching blogposts', error);
   }
 }
 
 const author = await apiClient.getBlogName();
 console.log(`Author name: ${author}`); // Debugging log
-      const blogPosts = await apiClient.getBlogposts();
-      console.log(`Blog posts for user :${author}`, blogPosts);
+const blogPosts = await apiClient.getBlogposts();
+console.log(`Blog posts for user :${author}`, blogPosts);
 
 // async function testFunction() {
 //   const posts = await readPostsByUser('tetud.noroff.no';
@@ -47,6 +47,7 @@ console.log(`Author name: ${author}`); // Debugging log
 // console.log(readPostsByUser.data[0].author); // Debugging log
 
 function renderProfileInfo(author) {
+  console.log(author);
   const profileInfo = document.getElementById('profileInfo');
   if (!profileInfo) {
     console.error('Error: #profileInfo container not found in DOM');
@@ -54,7 +55,6 @@ function renderProfileInfo(author) {
   }
   profileInfo.innerHTML = ''; // Clear existing content
 
-  author = author.author; // Assuming author is an object with author property
   if (!author || !author.name || !author.avatar) {
     console.error('Error: Missing author data in API response');
     profileInfo.innerHTML = '<p>Profile information is not available.</p>';
@@ -71,12 +71,22 @@ function renderProfileInfo(author) {
   authorAvatar.alt = author.avatar.alt || `${author.name}'s avatar`;
   authorAvatar.className = 'profile-avatar';
 
+  const bannerImage = document.createElement('img');
+  bannerImage.src = author.banner.url;
+  bannerImage.alt = author.banner.alt || `${author.name}'s banner`;
+  bannerImage.className = 'profile-banner';
+
+  profileInfoContainer.append(authorAvatar, authorName, bannerImage);
   profileInfo.appendChild(profileInfoContainer);
-  profileInfoContainer.appendChild(authorAvatar);
-  profileInfoContainer.appendChild(authorName);
 }
 
-// renderProfileInfo ();
+async function handleProfileView() {
+  const author = await apiClient.getUserProfile();
+  console.log(author);
+  renderProfileInfo(author);
+}
+
+handleProfileView();
 
 function renderBlogposts(posts) {
   const thumbnailGrid = document.getElementById('profileFeed');
