@@ -60,7 +60,7 @@ function renderProfileInfo(author) {
     profileInfo.innerHTML = '<p>Profile information is not available.</p>';
     return;
   }
-  const authorName = document.createElement('h3');
+  const authorName = document.createElement('h1');
   authorName.textContent = author.name;
 
   const profileInfoContainer = document.createElement('div');
@@ -71,13 +71,29 @@ function renderProfileInfo(author) {
   authorAvatar.alt = author.avatar.alt || `${author.name}'s avatar`;
   authorAvatar.className = 'profile-avatar';
 
-  const bannerImage = document.createElement('img');
-  bannerImage.src = author.banner.url;
-  bannerImage.alt = author.banner.alt || `${author.name}'s banner`;
-  bannerImage.className = 'profile-banner';
+  const followersAndPostsContainer = document.createElement('div');
+  followersAndPostsContainer.className = 'followers-postst-count';
 
-  profileInfoContainer.append(authorAvatar, authorName, bannerImage);
+  const postsCount = document.createElement('p');
+  postsCount.textContent = `Posts: ${author._count.posts}`; // Assuming author object has postsCount property
+
+  const followersCount = document.createElement('p');
+  followersCount.textContent = `Followers: ${author._count.followers}`; // Assuming author object has followersCount property
+
+  const followingCount = document.createElement('p');
+  followingCount.textContent = `Following: ${author._count.following}`; // Assuming author object has followingCount property
+  
+
+  // const bannerImage = document.createElement('img');
+  // bannerImage.src = author.banner.url;
+  // bannerImage.alt = author.banner.alt || `${author.name}'s banner`;
+  // bannerImage.className = 'profile-banner';
   profileInfo.appendChild(profileInfoContainer);
+  profileInfoContainer.append( authorAvatar, authorName,);  
+  profileInfo.appendChild(followersAndPostsContainer);
+  followersAndPostsContainer.append(postsCount, followersCount, followingCount);
+
+
 }
 
 async function handleProfileView() {

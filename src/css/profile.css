@@ -12,29 +12,51 @@
   align-items: center;
 }
 
-#profileInfo img {
+#profileInfo .profile-avatar {
   border-radius: 50%;
-  max-width: 15rem;
-  border: solid 0.5rem pink;
+  width: 60%;
+  max-height: 20rem;
+  object-fit: cover;
+  position: relative;
+  border: solid 0.2rem pink;
   box-shadow: black 0px 0px 10px;
+  /* margin: 0 0rem 0 2rem; */
+}
+
+#profileInfo {
+display: grid;
+grid-template-columns: 1fr 1fr;
+box-shadow: inset 0px 0px 15px  rgba(255, 255, 255, 0.1);
+padding: 1rem 0;
 }
 
 .profile-info-container {
   display: flex;
   flex-direction: column;
+align-items: center;
+
+}
+
+.followers-postst-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  gap: 2rem;
 }
 
-.profile-name {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: black;
-  text-transform: uppercase;
+.followers-postst-count p {
+/* gap: 1rem; */
 }
 
-h1,
+h1 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  font-family: "IBM Plex Serif";
+  margin: 0;
+}
+
 h2,
 h3,
 h4,
@@ -46,8 +68,6 @@ h6 {
   font-weight: 500;
 }
 
-.container {
+/* .container {
   margin: 5rem 0 0 0;
-
-  /* color: white; */
-};
+} */

@@ -1,5 +1,5 @@
 import { API_BASE_URL, API_AUTH, API_KEY } from './constants.js'; // Import API_BASE_URL
-import { API_SOCIAL_PROFILES } from './constants.js';
+import { API_SOCIAL_PROFILES, API_SOCIAL_POSTS } from './constants.js';
 
 /**
  * Custom error class for handling authentication errors.
@@ -96,6 +96,26 @@ export class youStoryApi {
     );
     return data;
   }
+
+  
+async getAllBlogposts() {
+  const accessToken = this._getRequiredAccessToken();
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-Noroff-API-Key': `${API_KEY}`, // Include the API key
+    },
+  };
+
+  const { data } = await this._request(
+    API_SOCIAL_POSTS,
+    options,
+    'Error fetching blogposts',
+  );
+  return data;
+}
 
   /**
    * Creates a new blog post.
