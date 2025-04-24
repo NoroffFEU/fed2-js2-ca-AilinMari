@@ -98,7 +98,7 @@ function renderBlogposts(posts) {
     const author = document.createElement("p");
     author.textContent = blogpost.author?.name;
     author.className = "author-name";
-    author.href = API_SOCIAL_POSTS + "/" + blogpost.author?.id;
+    author.href = API_SOCIAL_POSTS + "/" + blogpost._author?.id;
 
     const bodyText = document.createElement("p");
     bodyText.textContent = blogpost.body;
