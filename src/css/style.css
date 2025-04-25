@@ -38,7 +38,7 @@ main {
   box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
 }
 
-.container .post-image  {
+.container .post-image {
   width: 100%;
   max-width: 1000px;
   object-fit: cover;
@@ -59,13 +59,13 @@ main {
   display: flex;
   margin: 1rem 0 0 1rem;
   gap: 0.5rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .textContentContainer {
   display: flex;
   flex-direction: column;
-  margin: .5rem 0 0 0.5rem;
+  margin: 0.5rem 0 0 0.5rem;
 }
 
 .textContentContainer p {
@@ -83,11 +83,15 @@ main {
   font-weight: 400;
   font-family: "Raleway", sans-serif;
 } */
+a {
+  color: pink;
+  font-weight: 600;
+  text-decoration: none;
+}
 h2 {
   font-size: 1rem;
   font-weight: 600;
 }
-
 
 h2,
 h3,
@@ -170,7 +174,6 @@ form label {
   font-family: "IBM plex Sans Condensed", sans-serif;
   padding: 0 0 0.5rem 0;
 }
-
 
 .hamburger {
   background: none;
@@ -259,8 +262,8 @@ footer {
   color: pink;
   font-family: "IBM plex Sans Condensed", sans-serif;
   font-size: 1rem;
-margin: 5rem 0 0 0;
-box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+  margin: 5rem 0 0 0;
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
 }
 
 /* Adjustments for mobile view */
@@ -268,7 +271,7 @@ box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow 
   body {
     margin: 0;
     padding: 0;
-   height: fit-content;
+    height: fit-content;
   }
 
   h1 {
@@ -310,6 +313,4 @@ box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow 
   .nav-links {
     align-items: flex-start;
   }
-
-
 }
