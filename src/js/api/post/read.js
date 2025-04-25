@@ -114,4 +114,23 @@ export async function readPostByAuthorAndId(username, postId) {
   }
 }
 
-
+export async function readPostBy(postId) {
+  try {
+    const response = await fetch(`${API_SOCIAL_POSTS}/${postId}?_author=true`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "X-Noroff-API-Key": `${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch post by ID");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

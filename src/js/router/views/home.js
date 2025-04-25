@@ -83,7 +83,7 @@ function renderBlogposts(posts) {
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = `../../post/index.html?id=${blogpost.id}&author=${blogpost.author?.name}`;
+    link.href = `../../post/?id=${blogpost.id}&author=${blogpost.author?.name}`;
 
     const img = document.createElement("img");
     img.src = blogpost.media?.url;

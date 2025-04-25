@@ -1,40 +1,64 @@
 alert("Single Post Page");
 import { youStoryApi } from "../../api/apiClient.js";
 import { authGuard } from "../../utilities/authGuard.js";
-import { readPostsByUser } from "../../api/post/read.js";
+
+let apiClient = new youStoryApi();
+
+
 
 
 authGuard();
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("id");
-
+getBlogpostByID();
 async function getBlogpostByID() {
   try {
-    let blogpost = await readPostsByUser(postId); // Use the fixed readPost function
-    renderBlogpostbyId(blogpost);
+    let blogpost = await apiClient.getBlogpostByIdAndAuthor(postId);
+
+    renderBlogpostbyId(postId, blogpost);
+    console.log(blogpost);
   } catch (error) {
     console.error("Error fetching blogpost", error);
   }
-}
 
-function renderBlogpostbyId(blogpost) {
-  const postContainer = document.getElementById("single-post");
 
-  const img = document.createElement("img");
-  img.src = blogpost.media.url;
-  img.alt = blogpost.media.alt;
+// function renderBlogpost(blogpost) {
+//   const postContainer = document.getElementById("single-post");
+//   if (!postContainer) {
+//     console.error("Error: #blogpostsContainer not found in DOM");
+//     return;
+//   }
+//   postContainer.innerHTML = ""; // Clear existing content
 
-  const postTitle = document.createElement("h1");
-  postTitle.textContent = blogpost.title;
+//   if (!Array.isArray(blogpost) || blogpost.length === 0) {
+//     postContainer.innerHTML = "<p>No blog posts available.</p>";
+//     return;
+//   }
 
-  const author = document.createElement("p");
-  author.textContent = "By: " + blogpost.author.name;
+function renderPost(post) {
+    const container = document.getElementById("single-post");
+    if (!container) return;
+    container.innerHTML = ''; // clear old content
 
-  postContainer.appendChild(img);
-  postContainer.appendChild(postTitle);
-  postTitle.appendChild(author);
-}
+    if (post.media?.url) {
+      const img = document.createElement("img");
+      img.src = post.media.url;
+      img.alt = post.media.alt || '';
+      container.appendChild(img);
+    }
+    const title = document.createElement("h1");
+    title.textContent = post.title;
+    container.appendChild(title);
+
+    const author = document.createElement("p");
+    author.textContent = "By: " + (post.author?.name || 'Unknown');
+    container.appendChild(author);
+
+    // …add body, tags, edit/delete buttons etc.…
+  }
+
+  renderPost(blogpost);
 
 //   const createdDate = document.createElement("p");
 //   createdDate.textContent = "published " + blogpost.created.split("T")[0];
@@ -89,3 +113,4 @@ function renderBlogpostbyId(blogpost) {
 document.addEventListener("DOMContentLoaded", () => {
   getBlogpostByID();
 });
+}

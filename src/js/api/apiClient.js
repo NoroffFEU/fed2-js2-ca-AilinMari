@@ -71,6 +71,34 @@ export class youStoryApi {
     return data;
   }
 
+
+
+    /**
+   * Fetches all blog posts.
+   * @returns {Promise<any>} An array of blog posts.
+   */
+    async getBlogpostByIdAndAuthor() {
+      console.log('Fetching blog posts from:',); // Debugging API URL
+  
+      const accessToken = this._getRequiredAccessToken();
+  
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+          'X-Noroff-API-Key': `${API_KEY}`, // Include the API key
+        },
+      };
+      const postId = urlParams.get("id");
+      const { data } = await this._request(
+        API_SOCIAL_POSTS + `${postId}/?_author=true`,
+        options,
+        'Error fetching blogposts',
+      );
+      return data;
+    }
+
   /**
    * Fetches all blog posts.
    * @returns {Promise<any>} An array of blog posts.
@@ -117,6 +145,24 @@ async getAllBlogposts() {
   return data;
 }
 
+async getBlogpostByIdAndAuthor() {
+  const accessToken = this._getRequiredAccessToken();
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-Noroff-API-Key': `${API_KEY}`, // Include the API key
+    },
+  };
+
+  const { data } = await this._request(
+    API_SOCIAL_POSTS + `${id}/?_author=true`,
+    options,
+    'Error fetching blogposts',
+  );
+  return data;
+}
   /**
    * Creates a new blog post.
    * @param {string} title - The title of the blog post.
@@ -314,3 +360,24 @@ async getAllBlogposts() {
     return await this._request(url, options, 'Error updating user profile');
   }
 }
+
+// export async function readPostBy(postId) {
+//   try {
+//     const response = await fetch(`${API_SOCIAL_POSTS}/${postId}?_author=true`, {
+//       method: "GET",
+//       headers: {
+//         Accept: "application/json",
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//         "X-Noroff-API-Key": `${API_KEY}`,
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch post by ID");
+//     }
+//     return await response.json();
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// }
