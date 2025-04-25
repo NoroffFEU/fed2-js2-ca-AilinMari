@@ -40,11 +40,14 @@ export async function readPosts(limit = 12, page = 1, tag) {
   }
 }
 
-export async function readPostsByUser(username, limit = 12, page = 1, tag) {
+export async function readPostsByUser(username, postId, limit = 12, page = 1, tag) {
   try {
-    const url = new URL(`${API_SOCIAL_POSTS}/?_author=true${username}`);
+    const url = new URL(`${API_SOCIAL_POSTS}/${username}`);
     url.searchParams.append("limit", limit);
     url.searchParams.append("page", page);
+    url.searchParams.append("_author", "true");
+    url.searchParams.append("author", username); // Filter by username
+    url.searchParams.append("id", postId);
     if (tag) url.searchParams.append("tag", tag);
 
     const response = await fetch(url, { headers: headers() });
@@ -78,33 +81,6 @@ export async function readPostsByAuthor(username, limit = 12, page = 1) {
 
     if (!response.ok) {
       throw new Error("Failed to fetch posts by author");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-export async function readPostByAuthorAndId(username, postId) {
-  try {
-    const url = new URL(`${API_SOCIAL_POSTS}/${postId}`);
-    url.searchParams.append("_author", "true");
-    url.searchParams.append("author", username); // Filter by username
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "X-Noroff-API-Key": `${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch the post by author and ID");
     }
 
     return await response.json();

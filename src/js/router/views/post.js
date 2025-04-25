@@ -1,64 +1,49 @@
-alert("Single Post Page");
-import { youStoryApi } from "../../api/apiClient.js";
-import { authGuard } from "../../utilities/authGuard.js";
-
-let apiClient = new youStoryApi();
-
-
-
+// alert('Single Post Page');
+import { youStoryApi } from '../../api/apiClient.js';
+import { authGuard } from '../../utilities/authGuard.js';
+import { readPostsByUser } from '../../api/post/read.js';
 
 authGuard();
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const postId = urlParams.get("id");
-getBlogpostByID();
+                                      
+
 async function getBlogpostByID() {
   try {
-    let blogpost = await apiClient.getBlogpostByIdAndAuthor(postId);
-
-    renderBlogpostbyId(postId, blogpost);
-    console.log(blogpost);
+    let blogPost = await readPostsByUser(postId);
+    return blogPost;
   } catch (error) {
-    console.error("Error fetching blogpost", error);
+    console.error('Error fetching blogpost', error);
   }
+}
 
+function renderBlogpostbyId(blogpost) {
+  const postContainer = document.getElementById('single-post');
 
-// function renderBlogpost(blogpost) {
-//   const postContainer = document.getElementById("single-post");
-//   if (!postContainer) {
-//     console.error("Error: #blogpostsContainer not found in DOM");
-//     return;
-//   }
-//   postContainer.innerHTML = ""; // Clear existing content
+  const img = document.createElement('img');
+  img.src = blogpost.media?.url;
+  img.alt = blogpost.media?.alt;
 
-//   if (!Array.isArray(blogpost) || blogpost.length === 0) {
-//     postContainer.innerHTML = "<p>No blog posts available.</p>";
-//     return;
-//   }
+  const postTitle = document.createElement('h1');
+  postTitle.textContent = blogpost.media?.title;
 
-function renderPost(post) {
-    const container = document.getElementById("single-post");
-    if (!container) return;
-    container.innerHTML = ''; // clear old content
+  const author = document.createElement('p');
+  author.textContent = 'By: ' + blogpost.author?.name;
 
-    if (post.media?.url) {
-      const img = document.createElement("img");
-      img.src = post.media.url;
-      img.alt = post.media.alt || '';
-      container.appendChild(img);
-    }
-    const title = document.createElement("h1");
-    title.textContent = post.title;
-    container.appendChild(title);
+  postContainer.appendChild(img);
+  postContainer.appendChild(postTitle);
+  postTitle.appendChild(author);
+}
 
-    const author = document.createElement("p");
-    author.textContent = "By: " + (post.author?.name || 'Unknown');
-    container.appendChild(author);
+async function main() {
+  const blogpost = await getBlogpostByID();
+  console.log(blogpost);
+  renderBlogpostbyId(blogpost);
+}
 
-    // …add body, tags, edit/delete buttons etc.…
-  }
-
-  renderPost(blogpost);
+main();
 
 //   const createdDate = document.createElement("p");
 //   createdDate.textContent = "published " + blogpost.created.split("T")[0];
@@ -110,7 +95,7 @@ function renderPost(post) {
 //     alert("Failed to delete post");
 //   }
 // }
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   getBlogpostByID();
 });
-}
+ 
