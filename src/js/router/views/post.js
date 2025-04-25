@@ -35,15 +35,6 @@ function renderBlogpostbyId(blogpost) {
   postContainer.appendChild(postTitle);
   postTitle.appendChild(author);
 
-//   const postContentContainer = document.getElementById("blogpost-content");
-
-//   const paragraphs = blogpost.body.split("\n");
-//   paragraphs.forEach((paragraph) => {
-//     const postContent = document.createElement("p");
-//     postContent.textContent = paragraph;
-//     postContent.className = "post-content";
-//     postContentContainer.appendChild(postContent);
-//   });
 
   const createdDate = document.createElement("p");
   createdDate.textContent = "published " + blogpost.created.split("T")[0];
@@ -79,8 +70,6 @@ function renderBlogpostbyId(blogpost) {
     deleteButton.style.display = "none";
   }
 
-//   postContentContainer.appendChild(createdDate);
-//   postContentContainer.appendChild(editDate);
   postButtonContainer.appendChild(editPostButton);
   postButtonContainer.appendChild(deleteButton);
 }
