@@ -38,11 +38,28 @@ main {
   box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
 }
 
-.container img {
+.container .post-image  {
   width: 100%;
   max-width: 1000px;
   object-fit: cover;
   max-height: 20rem;
+}
+
+.container .user-avatar {
+  border-radius: 50%;
+  height: 2.5rem;
+  max-width: 2.5rem;
+  object-fit: cover;
+  position: relative;
+  border: solid 0.2rem pink;
+  box-shadow: black 0px 0px 10px;
+}
+
+.author-container {
+  display: flex;
+  margin: 1rem 0 0 1rem;
+  gap: 0.5rem;
+  font-family: 'Raleway', sans-serif;
 }
 
 .textContentContainer {

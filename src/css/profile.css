@@ -14,8 +14,8 @@
 
 #profileInfo .profile-avatar {
   border-radius: 50%;
-  width: 60%;
-  max-height: 20rem;
+  height: 5rem;
+  width: 5rem;
   object-fit: cover;
   position: relative;
   border: solid 0.2rem pink;
@@ -24,17 +24,16 @@
 }
 
 #profileInfo {
-display: grid;
-grid-template-columns: 1fr 1fr;
-box-shadow: inset 0px 0px 15px  rgba(255, 255, 255, 0.1);
-padding: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
 }
 
 .profile-info-container {
   display: flex;
   flex-direction: column;
-align-items: center;
-
+  align-items: center;
 }
 
 .followers-postst-count {
@@ -47,19 +46,17 @@ align-items: center;
 }
 
 .followers-postst-count p {
-font-family: 'Raleway', sans-serif;
-font-size: 0.8rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
 }
 
 h1 {
   font-size: 1.2rem;
   font-weight: 300;
-  font-style: italic;
-  font-family: "IBM Plex Serif";
+  /* font-style: italic; */
+  font-family: "Raleway", sans-serif;
   margin: 0;
 }
-
-
 
 /* .container {
   margin: 5rem 0 0 0;

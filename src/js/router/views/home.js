@@ -83,11 +83,12 @@ function renderBlogposts(posts) {
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = API_SOCIAL_POSTS + "/" + blogpost.id;
+    link.href = `../../post/index.html?id=${blogpost.id}`;
 
     const img = document.createElement("img");
     img.src = blogpost.media?.url;
     img.alt = blogpost.media?.alt;
+    img.className = "post-image";
 
     const title = document.createElement("h2");
     title.textContent = blogpost.title;
@@ -95,21 +96,35 @@ function renderBlogposts(posts) {
     const textContentContainer = document.createElement("div");
     textContentContainer.className = "textContentContainer";
 
+    const authorContainer = document.createElement("div");
+    authorContainer.className = "author-container";
+
     const author = document.createElement("p");
     author.textContent = blogpost.author?.name;
     author.className = "author-name";
-    author.href = API_SOCIAL_POSTS + "/" + blogpost._author?.id;
 
     const bodyText = document.createElement("p");
     bodyText.textContent = blogpost.body;
     bodyText.className = "bodyText";
 
-    postContainer.appendChild(author);
-    postContainer.appendChild(img);
-    postContainer.appendChild(textContentContainer);
-    textContentContainer.appendChild(title);
-    textContentContainer.appendChild(bodyText);
+    const userAvatar = document.createElement("img");
+    userAvatar.src = blogpost.author?.avatar.url;
+    userAvatar.alt =
+      blogpost.author?.avatar.alt || `${blogpost.author.name}'s avatar`;
+    userAvatar.className = "user-avatar";
+
+    // Correctly append img and title to the link
+    link.appendChild(img);
+    link.appendChild(title);
+    postContainer.appendChild(authorContainer);
+    authorContainer.appendChild(userAvatar);
+    // Append the link to the post container
     postContainer.appendChild(link);
+
+    authorContainer.appendChild(author);
+    postContainer.appendChild(textContentContainer);
+    textContentContainer.appendChild(bodyText);
+
     blogpostsGrid.appendChild(postContainer);
   });
 }
