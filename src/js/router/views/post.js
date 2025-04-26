@@ -1,40 +1,56 @@
 // alert('Single Post Page');
-import { youStoryApi } from '../../api/apiClient.js';
-import { authGuard } from '../../utilities/authGuard.js';
-import { readPostsByUser } from '../../api/post/read.js';
+import { youStoryApi } from "../../api/apiClient.js";
+import { authGuard } from "../../utilities/authGuard.js";
+import { readPostsByUser } from "../../api/post/read.js";
 
 authGuard();
 
 const urlParams = new URLSearchParams(window.location.search);
 
 const postId = urlParams.get("id");
-                                      
 
 async function getBlogpostByID() {
   try {
     let blogPost = await readPostsByUser(postId);
     return blogPost;
   } catch (error) {
-    console.error('Error fetching blogpost', error);
+    console.error("Error fetching blogpost", error);
   }
 }
 
 function renderBlogpostbyId(blogpost) {
-  const postContainer = document.getElementById('single-post');
+  const postContainer = document.getElementById(`single-post`);
 
-  const img = document.createElement('img');
-  img.src = blogpost.media?.url;
-  img.alt = blogpost.media?.alt;
+  const userInfo = document.createElement("div");
+  userInfo.className = "user-info";
 
-  const postTitle = document.createElement('h1');
-  postTitle.textContent = blogpost.media?.title;
+  const img = document.createElement("img");
+  img.src = blogpost.data.media?.url;
+  img.alt = blogpost.data.media?.alt;
+  img.className = "post-image";
 
-  const author = document.createElement('p');
-  author.textContent = 'By: ' + blogpost.author?.name;
+  const postTitle = document.createElement("h1");
+  postTitle.textContent = blogpost.data.title;
+  postTitle.className = "post-title";
 
+  const postContent = document.createElement("p");
+  postContent.textContent = blogpost.data.body;
+  postContent.className = "body-text";
+
+  const author = document.createElement("p");
+  author.textContent = blogpost.data.author.name;
+
+  const avatar = document.createElement("img");
+  avatar.src = blogpost.data.author.avatar.url;
+  avatar.className = "user-avatar";
+
+  postContainer.appendChild(userInfo);
+  userInfo.appendChild(avatar);
+  userInfo.appendChild(author);
   postContainer.appendChild(img);
   postContainer.appendChild(postTitle);
-  postTitle.appendChild(author);
+  postContainer.appendChild(postContent);
+  //   postContent.appendChild(postTitle);
 }
 
 async function main() {
@@ -95,7 +111,6 @@ main();
 //     alert("Failed to delete post");
 //   }
 // }
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   getBlogpostByID();
 });
- 

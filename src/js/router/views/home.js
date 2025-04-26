@@ -85,6 +85,10 @@ function renderBlogposts(posts) {
     const link = document.createElement("a");
     link.href = `../../post/?id=${blogpost.id}`;
 
+    const profileLink = document.createElement("a");
+    profileLink.href = `../../profile/?author=${blogpost.author.name}`;
+    profileLink.className = "profile-link";
+
     const img = document.createElement("img");
     img.src = blogpost.media?.url;
     img.alt = blogpost.media?.alt;
@@ -92,6 +96,7 @@ function renderBlogposts(posts) {
 
     const title = document.createElement("h2");
     title.textContent = blogpost.title;
+    title.className = "post-title";
 
     const textContentContainer = document.createElement("div");
     textContentContainer.className = "textContentContainer";
@@ -118,6 +123,9 @@ function renderBlogposts(posts) {
     link.appendChild(title);
     postContainer.appendChild(authorContainer);
     authorContainer.appendChild(userAvatar);
+    authorContainer.appendChild(profileLink);
+    profileLink.appendChild(author);
+    profileLink.appendChild(userAvatar);
     // Append the link to the post container
     postContainer.appendChild(link);
 

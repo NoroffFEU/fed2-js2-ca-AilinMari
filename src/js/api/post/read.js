@@ -43,8 +43,8 @@ export async function readPosts(limit = 12, page = 1, tag) {
 export async function readPostsByUser(username, postId, limit = 12, page = 1, tag) {
   try {
     const url = new URL(`${API_SOCIAL_POSTS}/${username}`);
-    url.searchParams.append("limit", limit);
-    url.searchParams.append("page", page);
+    // url.searchParams.append("limit", limit);
+    // url.searchParams.append("page", page);
     url.searchParams.append("_author", "true");
     url.searchParams.append("author", username); // Filter by username
     url.searchParams.append("id", postId);

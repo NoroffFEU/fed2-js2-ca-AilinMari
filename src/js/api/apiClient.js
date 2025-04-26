@@ -57,8 +57,20 @@ export class youStoryApi {
    */
   getBlogName() {
     const loggedInUserName = localStorage.getItem("name");
-    return loggedInUserName ? loggedInUserName : "name";
+    return loggedInUserName ? loggedInUserName : "?_author=true"; // Default value if not found
   }
+
+  getUserProfile() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const author = urlParams.get("author"); // Extract the 'author' query parameter
+
+    if (!author) {
+      console.error("Error: No author specified in the URL.");
+      return;
+    } 
+    return author; // Return the author name
+  }
+
 
   /**
    * Fetches a single blog post by ID.
@@ -68,33 +80,6 @@ export class youStoryApi {
   async getBlogpostByID(postId) {
     const url = `${this.blogUrl}/${postId}`;
     const { data } = await this._request(url, {}, "Error fetching blogpost");
-    return data;
-  }
-
-  /**
-   * Fetches all blog posts.
-   * @returns {Promise<any>} An array of blog posts.
-   */
-  async getBlogpostByIdAndAuthor() {
-    console.log("Fetching blog posts from:"); // Debugging API URL
-
-    const accessToken = this._getRequiredAccessToken();
-
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-      },
-    };
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id"); // Get the post ID from URL parameters
-    const { data } = await this._request(
-      API_SOCIAL_POSTS + `${id}/?_author=true`,
-      options,
-      "Error fetching blogposts"
-    );
     return data;
   }
 
@@ -117,7 +102,7 @@ export class youStoryApi {
     };
 
     const { data } = await this._request(
-      this.blogUrl,
+      API_SOCIAL_PROFILES + `?_author=true`,
       options,
       "Error fetching blogposts"
     );
@@ -143,24 +128,6 @@ export class youStoryApi {
     return data;
   }
 
-  // async getBlogpostByIdAndAuthor() {
-  //   const accessToken = this._getRequiredAccessToken();
-  //   const options = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${accessToken}`,
-  //       'X-Noroff-API-Key': `${API_KEY}`, // Include the API key
-  //     },
-  //   };
-
-  //   const { data } = await this._request(
-  //     API_SOCIAL_POSTS + `${id}/?_author=true`,
-  //     options,
-  //     'Error fetching blogposts',
-  //   );
-  //   return data;
-  // }
   /**
    * Creates a new blog post.
    * @param {string} title - The title of the blog post.
@@ -357,25 +324,47 @@ export class youStoryApi {
 
     return await this._request(url, options, "Error updating user profile");
   }
-}
 
-// export async function readPostBy(postId) {
-//   try {
-//     const response = await fetch(`${API_SOCIAL_POSTS}/${postId}?_author=true`, {
-//       method: "GET",
-//       headers: {
-//         Accept: "application/json",
-//         Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         "X-Noroff-API-Key": `${API_KEY}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     if (!response.ok) {
-//       throw new Error("Failed to fetch post by ID");
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
+  /**
+   * Follows a user by username.
+   * @param {string} username - The username of the user to follow.
+   * @returns {Promise<any>} An array of blog posts.
+   */
+  async followUser(username) {
+    const url = `${API_SOCIAL_PROFILES}/${username}/follow`; // Construct the API URL
+    const accessToken = this._getRequiredAccessToken();
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+      },
+      body: JSON.stringify({ username }), // Include the username in the request body
+    };
+
+    return await this._request(url, options, "Error following user");
+  }
+
+  /**
+   * Fetches a user's profile information by username.
+   * @param {string} username - The username of the user.
+   * @returns {Promise<any>} The user's profile data.
+   */
+  async getUserProfileByUsername(username) {
+    const url = `${API_SOCIAL_PROFILES}/${username}`;
+    const accessToken = this._getRequiredAccessToken();
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": `${API_KEY}`,
+      },
+    };
+
+    return await this._request(url, options, "Error fetching user profile");
+  }
+}
