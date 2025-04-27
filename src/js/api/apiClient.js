@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_AUTH, API_KEY } from "./constants.js"; // Import API_BASE_URL
+import { API_BASE_URL, API_AUTH, API_AUTH_LOGIN, API_KEY } from "./constants.js"; // Import API_BASE_URL
 import { API_SOCIAL_PROFILES, API_SOCIAL_POSTS } from "./constants.js";
 import { headers } from "./headers.js";
 
@@ -282,12 +282,13 @@ export class SocialApi {
       headers: {
         "Content-Type": "application/json",
         accept: "application/json",
+        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
       },
       body: JSON.stringify(body),
     };
 
     const { data } = await this._request(
-      `${this.authUrl}/login`,
+      API_AUTH_LOGIN,
       options,
       "Login failed"
     );
@@ -306,7 +307,7 @@ export class SocialApi {
    * @returns {Promise<any>} The updated profile data.
    */
   async updateUserProfile(data) {
-    const username = this.getBlogName(); // Get the logged-in user's name
+    const username = localStorage.getItem("name"); // Get the username from local storage
     const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
     const accessToken = this._getRequiredAccessToken();
 

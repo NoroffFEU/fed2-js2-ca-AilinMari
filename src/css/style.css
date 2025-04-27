@@ -234,7 +234,7 @@ form label {
   width: 100%;
   background-color: black; /* Optional: Add a background color */
   z-index: 1000; /* Ensure it stays above other elements */
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.5); /* Optional shadow for better visibility */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
   padding: 0.5rem 0; /* Add padding for spacing */
 }
 
@@ -257,9 +257,9 @@ form label {
   color: pink;
 }
 
-#search {
+/* #search {
   display: none;
-}
+} */
 
 .create-sign {
   max-width: fit-content;
@@ -271,14 +271,12 @@ form label {
   font-size: 1.2rem;
 }
 
-
 .nav-links {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1rem;
   width: 100%;
-
   top: 3rem; /* Align it to the top */
   left: 0; /* Align it to the left */
   background-color: black; /* Add a background color to overlay content */
@@ -296,13 +294,7 @@ nav button {
   font-weight: 300;
 }
 
-.nav-links.active {
-  display: flex;
-}
 
-.nav-links.active {
-  display: flex; /* Show the menu when active */
-}
 
 form {
   display: flex;

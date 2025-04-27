@@ -1,7 +1,7 @@
-import { youStoryApi } from "../api/apiClient.js";
+import { SocialApi } from "../api/apiClient.js";
 import { API_KEY } from "../api/constants.js";
 
-const apiClient = new youStoryApi();
+const apiClient = new SocialApi();
 
 document
   .querySelector("form[name='login']")
@@ -16,11 +16,8 @@ document
       localStorage.setItem("token", data.accessToken);
       localStorage.setItem("name", data.name); // Store the logged-in user's name
 
-      alert("Login successful!");
 
-      // Fetch and log arrays for the logged-in user
-      const blogPosts = await apiClient.getBlogposts();
-      console.log(`Blog posts for user ${data.name}:`, blogPosts);
+;
 
       window.location.href = "/"; // Redirect to the main page after successful login
     } catch (error) {
@@ -29,3 +26,5 @@ document
       );
     }
   });
+
+
