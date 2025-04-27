@@ -132,4 +132,4 @@ function renderBlogposts(posts) {
     thumbnailGrid.appendChild(postContainer);
   });
 }
-// getBlogpost();
+getBlogpost();
