@@ -45,23 +45,23 @@ function renderProfile(profile) {
   profileInfoContainer.append(authorAvatar, authorName);
   profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
-} 
+}
 
 renderProfile(profile);
 
-const blogpost = await apiClient.getAllBlogposts();
-console.log(blogpost); // Debugging log
+const post = await apiClient.getAllPosts();
+console.log(post); // Debugging log
 
-function renderBlogposts(posts) {
-  const blogpostsGrid = document.getElementById("storyfeed");
-  if (!blogpostsGrid) {
+function renderAllPosts(posts) {
+  const postGrid = document.getElementById("storyfeed");
+  if (!postGrid) {
     console.error("Error: #blogpostsContainer not found in DOM");
     return;
   }
-  blogpostsGrid.innerHTML = ""; // Clear existing content
+  postGrid.innerHTML = ""; // Clear existing content
 
-  if (!Array.isArray(blogpost) || blogpost.length === 0) {
-    blogpostsGrid.innerHTML = "<p>No blog posts available.</p>";
+  if (!Array.isArray(post) || post.length === 0) {
+    postGrid.innerHTML = "<p>No blog posts available.</p>";
     return;
   }
 
@@ -73,7 +73,7 @@ function renderBlogposts(posts) {
     link.href = `../../post/?id=${blogpost.id}`;
 
     const profileLink = document.createElement("a");
-    profileLink.href = `../../profile/?author=${blogpost.author.name}`;
+    profileLink.href = `../../profile/view/?author=${blogpost.author.name}`;
     profileLink.className = "profile-link";
 
     const img = document.createElement("img");
@@ -120,14 +120,14 @@ function renderBlogposts(posts) {
     postContainer.appendChild(textContentContainer);
     textContentContainer.appendChild(bodyText);
 
-    blogpostsGrid.appendChild(postContainer);
+    postGrid.appendChild(postContainer);
   });
 }
 
 async function handleBlogpostsView() {
-  const blogposts = await apiClient.getAllBlogposts();
+  const blogposts = await apiClient.getAllPosts();
   console.log(blogposts);
-  renderBlogposts(blogposts);
+  renderAllPosts(blogposts);
 }
 
 handleBlogpostsView();

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noroff FED2 JS2 CA</title>
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/profile.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+      @import url("https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+    </style>
+  </head>
+  <body>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/profile/me/">My Profile</a>
+        <a href="/auth/login/">Login</a>
+        <a href="/auth/register/">Register</a>
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <div id="view-profile"></div>
+
+      <div id="view-posts-grid"></div>
+
+
+    </main>
+    <footer>
+      <div id="footer-content">
+        <p>© 2023 Youstory. All rights reserved.</p>
+        <p>Made with ❤️ by Noroff student</p>
+      </div>
+    </footer>
+  </body>
+</html>

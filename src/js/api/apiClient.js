@@ -1,5 +1,6 @@
 import { API_BASE_URL, API_AUTH, API_KEY } from "./constants.js"; // Import API_BASE_URL
 import { API_SOCIAL_PROFILES, API_SOCIAL_POSTS } from "./constants.js";
+import { headers } from "./headers.js";
 
 /**
  * Custom error class for handling authentication errors.
@@ -45,15 +46,6 @@ export class SocialApi {
     return accessToken;
   }
 
-  /**
-   * Retrieves the blog name from local storage.
-   * @returns {string} The blog name.
-   */
-  getBlogName() {
-    const loggedInUserName = localStorage.getItem("name");
-    return loggedInUserName ? loggedInUserName : "?_author=true"; // Default value if not found
-  }
-
   async getUserProfile(username) {
     try {
       const accessToken = this._getRequiredAccessToken();
@@ -63,7 +55,7 @@ export class SocialApi {
       url.searchParams.append("_posts", "true"); // Include the _author parameter
       url.searchParams.append("_author", "true"); // Include the _author parameter
       url.searchParams.append("_avatar", "true"); // Include the _author parameter
-     
+
       const options = {
         method: "GET",
         headers: {
@@ -80,26 +72,75 @@ export class SocialApi {
     }
   }
 
-  /**
-   * Fetches a single blog post by ID.
-   * @param {string} postId - The ID of the blog post.
-   * @returns {Promise<any>} The blog post data.
-   */
-  async getBlogpostByID(postId) {
-    const url = `${this.blogUrl}/${postId}`;
-    const { data } = await this._request(url, {}, "Error fetching blogpost");
-    return data;
+  async getUserProfileByAuthor(author) {
+    try {
+      if (!author) {
+        throw new Error("Author parameter is missing.");
+      }
+
+      const url = new URL(`${API_SOCIAL_PROFILES}/${author}`);
+      url.searchParams.append("_followers", "true"); // Include followers
+      url.searchParams.append("_following", "true"); // Include following
+      url.searchParams.append("_posts", "true"); // Include posts
+      url.searchParams.append("_author", "true"); // Include author details
+      url.searchParams.append("_avatar", "true"); // Include avatar details
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this._getRequiredAccessToken()}`,
+          "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+        },
+      };
+
+      console.log("Fetching profile for author:", author); // Debugging log
+      return await this._request(
+        url.toString(),
+        options,
+        "Error fetching user profile"
+      );
+    } catch (error) {
+      console.error("Error in getUserProfileByauthor:", error);
+      throw error;
+    }
   }
 
-  /**
-   * Fetches all blog posts.
-   * @returns {Promise<any>} An array of blog posts.
-   */
-  async getBlogposts() {
-    console.log("Fetching blog posts from:", this.blogUrl); // Debugging API URL
+  // async getAllPostsByAuthor(author) {
+  //   try {
+  //     if (!author) {
+  //       throw new Error("Author parameter is missing.");
+  //     }
 
+  //     const url = new URL(`${API_SOCIAL_PROFILES}/${author}/posts`);
+  //     url.searchParams.append("_author", "true"); // Include the _author parameter
+  //     url.searchParams.append("_media", "true"); // Include the _author parameter
+  //     url.searchParams.append("_tags", "true"); // Include the _author parameter
+  //     url.searchParams.append("_body", "true"); // Include the _author parameter
+  //     url.searchParams.append("_title", "true"); // Include the _author parameter
+  //     const options = {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${this._getRequiredAccessToken()}`,
+  //         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+  //       },
+  //     };
+
+  //     console.log("Fetching posts by author:", author); // Debugging log
+  //     return await this._request(
+  //       url.toString(),
+  //       options,
+  //       "Error fetching user posts"
+  //     );
+  //   } catch (error) {
+  //     console.error("Error in getAllPostsByAuthor:", error);
+  //     throw error;
+  //   }
+  // }
+
+  async getAllPosts() {
     const accessToken = this._getRequiredAccessToken();
-
     const options = {
       method: "GET",
       headers: {
@@ -110,26 +151,7 @@ export class SocialApi {
     };
 
     const { data } = await this._request(
-      API_SOCIAL_PROFILES + `?_author=true`,
-      options,
-      "Error fetching blogposts"
-    );
-    return data;
-  }
-
-  async getAllBlogposts() {
-    const accessToken = this._getRequiredAccessToken();
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-      },
-    };
-
-    const { data } = await this._request(
-      API_SOCIAL_POSTS + `/?_author=true`,
+      API_SOCIAL_POSTS + `?_author=true`,
       options,
       "Error fetching blogposts"
     );

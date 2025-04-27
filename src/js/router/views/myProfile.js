@@ -12,7 +12,7 @@ const username = localStorage.getItem("name"); // Get the username from local st
 
 const profile = await apiClient.getUserProfile(username);
 
-console.log("profile", profile);
+// console.log("profile", profile);
 
 function renderProfile(profile) {
   const profileContainer = document.getElementById("profileInfo");
