@@ -1,7 +1,6 @@
 @import url(_reset.css);
 @import url(profile.css);
 
-
 body {
   display: flex;
   flex-direction: column;
@@ -64,9 +63,9 @@ main {
   font-family: "Raleway", sans-serif;
 }
 
-#single-post .profile-link{
+#single-post .profile-link {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   gap: 0.5rem;
 }
 
@@ -184,7 +183,7 @@ nav a:active {
 
 nav {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
   position: relative;
 }
@@ -228,35 +227,58 @@ form label {
   padding: 0 0 0.5rem 0;
 }
 
-.hamburger {
-  background: none;
-  border: none;
-  color: pink;
-  font-size: 2rem;
-  cursor: pointer;
-  margin-bottom: rem;
-  z-index: 1100; /* Ensure the hamburger button stays above the nav-links */
-  position: relative; /* Ensure z-index works */
-  width: fit-content;
-  align-self: flex-end;
+#user-links {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: black; /* Optional: Add a background color */
+  z-index: 1000; /* Ensure it stays above other elements */
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.5); /* Optional shadow for better visibility */
+  padding: 0.5rem 0; /* Add padding for spacing */
 }
 
-.hamburger:active {
-  background-color: black;
-  border: none;
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+}
+
+.links .home {
+  font-size: 1.7rem;
+}
+
+#search-button {
   width: fit-content;
-  box-shadow: none;
-  text-shadow: 0px 2px 4px pink;
+  background-color: black;
   color: pink;
 }
+
+#search {
+  display: none;
+}
+
+.create-sign {
+  max-width: fit-content;
+  border: solid 0.155rem pink;
+  border-radius: 50%;
+  padding: 0.5rem 0.7rem;
+  font-weight: 600;
+  font-family: "sans-serif";
+  font-size: 1.2rem;
+}
+
 
 .nav-links {
-  display: none;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 1rem;
   width: 100%;
-  position: absolute; /* Position the menu absolutely */
+
   top: 3rem; /* Align it to the top */
   left: 0; /* Align it to the left */
   background-color: black; /* Add a background color to overlay content */
@@ -316,7 +338,7 @@ form a:hover {
 /* Footer styles */
 footer {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 0 4rem 0;
   background-color: #000000; /* Adjust as needed */
   display: flex;
   justify-content: center;

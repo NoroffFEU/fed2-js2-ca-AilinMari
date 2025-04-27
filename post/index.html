@@ -9,10 +9,14 @@
     <script type="module" src="/src/js/auth/navHandler.js"></script>
     <script type="module" src="/src/js/auth/logoutHandler.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <nav>
-      <button class="hamburger" aria-label="Toggle navigation">☰</button>
+      <!-- <button class="hamburger" aria-label="Toggle navigation">☰</button> -->
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/profile/me/">My Profile</a>
@@ -25,6 +29,17 @@
     </nav>
     <main>
       <div id="single-post"></div>
+      <div id="user-links">
+        <div class="links">
+          <div class="searchbar">
+            <input type="text" id="search"
+            placeholder="Search for users..">
+            <button id="search-button">
+              <i class="fas fa-search"></i> 
+            </button></div>
+          <div class="create-sign"><a href="/post/create/">+</a></div>
+          <div class="home"><a href="/"><i class="fas fa-home"></div></i></a></div>
+        </div>
     </main>
     <footer>
       <div id="footer-content">
