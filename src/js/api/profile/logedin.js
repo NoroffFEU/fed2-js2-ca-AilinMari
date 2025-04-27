@@ -22,7 +22,6 @@ async function getBlogposts() {
 async function fetchProfileByAuthor() {
   const urlParams = new URLSearchParams(window.location.search);
   const author = urlParams.get("author"); // Extract the 'author' query parameter
-
   if (!author) {
     console.error("Error: No author specified in the URL.");
     return;
@@ -133,4 +132,4 @@ function renderBlogposts(posts) {
     thumbnailGrid.appendChild(postContainer);
   });
 }
-getBlogpost();
+// getBlogpost();
