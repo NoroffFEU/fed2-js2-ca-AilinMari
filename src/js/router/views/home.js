@@ -30,7 +30,7 @@ function renderProfile(profile) {
   authorAvatar.className = "profile-avatar";
 
   const followersAndPostsContainer = document.createElement("div");
-  followersAndPostsContainer.className = "followers-postst-count";
+  followersAndPostsContainer.className = "followers-posts-count";
 
   const postsCount = document.createElement("p");
   postsCount.textContent = `Posts: ${profile.data._count.posts}`; // Assuming author object has postsCount property
@@ -65,24 +65,24 @@ function renderAllPosts(posts) {
     return;
   }
 
-  posts.forEach((blogpost) => {
+  posts.forEach((post) => {
     const postContainer = document.createElement("div");
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = `../../post/?id=${blogpost.id}`;
+    link.href = `../../post/?id=${post.id}`;
 
     const profileLink = document.createElement("a");
-    profileLink.href = `../../profile/view/?author=${blogpost.author.name}`;
+    profileLink.href = `../../profile/view/?author=${post.author.name}`;
     profileLink.className = "profile-link";
 
     const img = document.createElement("img");
-    img.src = blogpost.media?.url;
-    img.alt = blogpost.media?.alt;
+    img.src = post.media?.url;
+    img.alt = post.media?.alt;
     img.className = "post-image";
 
     const title = document.createElement("h2");
-    title.textContent = blogpost.title;
+    title.textContent = post.title;
     title.className = "post-title";
 
     const textContentContainer = document.createElement("div");
@@ -92,17 +92,16 @@ function renderAllPosts(posts) {
     authorContainer.className = "author-container";
 
     const author = document.createElement("p");
-    author.textContent = blogpost.author?.name;
+    author.textContent = post.author?.name;
     author.className = "author-name";
 
     const bodyText = document.createElement("p");
-    bodyText.textContent = blogpost.body;
+    bodyText.textContent = post.body;
     bodyText.className = "bodyText";
 
     const userAvatar = document.createElement("img");
-    userAvatar.src = blogpost.author?.avatar.url;
-    userAvatar.alt =
-      blogpost.author?.avatar.alt || `${blogpost.author.name}'s avatar`;
+    userAvatar.src = post.author?.avatar.url;
+    userAvatar.alt = post.author?.avatar.alt || `${post.author.name}'s avatar`;
     userAvatar.className = "user-avatar";
 
     // Correctly append img and title to the link

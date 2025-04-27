@@ -29,7 +29,7 @@ function renderProfile(profile) {
   authorAvatar.className = "profile-avatar";
 
   const followersAndPostsContainer = document.createElement("div");
-  followersAndPostsContainer.className = "followers-postst-count";
+  followersAndPostsContainer.className = "followers-posts-count";
 
   const postsCount = document.createElement("p");
   postsCount.textContent = `Posts: ${profile.data._count.posts}`; // Assuming author object has postsCount property
@@ -44,6 +44,6 @@ function renderProfile(profile) {
   profileInfoContainer.append(authorAvatar, authorName);
   profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
-} 
+}
 
 renderProfile(profile);

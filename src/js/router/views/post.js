@@ -28,6 +28,10 @@ function renderPost(post) {
   img.alt = post.data.media?.alt;
   img.className = "post-image";
 
+  const profileLink = document.createElement("a");
+  profileLink.href = `../../profile/view/?author=${post.data.author?.name}`;
+  profileLink.className = "profile-link";
+
   const postTitle = document.createElement("h1");
   postTitle.textContent = post.data.title;
   postTitle.className = "post-title";
@@ -43,13 +47,15 @@ function renderPost(post) {
   avatar.src = post.data.author.avatar.url;
   avatar.className = "user-avatar";
 
+  profileLink.appendChild(avatar);
+  profileLink.appendChild(author);
+
+  userInfo.appendChild(profileLink);
+  
   postContainer.appendChild(userInfo);
-  userInfo.appendChild(avatar);
-  userInfo.appendChild(author);
   postContainer.appendChild(img);
   postContainer.appendChild(postTitle);
   postContainer.appendChild(postContent);
-  //   postContent.appendChild(postTitle);
 }
 
 async function main() {

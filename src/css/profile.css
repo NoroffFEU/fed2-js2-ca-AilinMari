@@ -12,7 +12,8 @@
   align-items: center;
 }
 
-#profileInfo .profile-avatar {
+#profileInfo .profile-avatar,
+#view-profile .profile-avatar {
   border-radius: 50%;
   height: 5rem;
   width: 5rem;
@@ -23,7 +24,8 @@
   /* margin: 0 0rem 0 2rem; */
 }
 
-#profileInfo {
+#profileInfo,
+#view-profile {
   display: grid;
   grid-template-columns: 1fr 1fr;
   box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
@@ -36,7 +38,7 @@
   align-items: center;
 }
 
-.followers-postst-count {
+.followers-posts-count {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -45,7 +47,7 @@
   margin: 0 1rem 0 0;
 }
 
-.followers-postst-count {
+.followers-posts-count {
   font-family: "Raleway", sans-serif;
   font-size: 0.8rem;
 }

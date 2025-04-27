@@ -64,6 +64,12 @@ main {
   font-family: "Raleway", sans-serif;
 }
 
+#single-post .profile-link{
+  display: flex;
+  flex-direction:row;
+  gap: 0.5rem;
+}
+
 #single-post .user-info img {
   border-radius: 50%;
   height: 2.5rem;
@@ -79,6 +85,12 @@ main {
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Raleway", sans-serif;
+}
+
+.post-description {
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0 0.5rem;
 }
 
 .post-title {

@@ -106,38 +106,38 @@ export class SocialApi {
     }
   }
 
-  // async getAllPostsByAuthor(author) {
-  //   try {
-  //     if (!author) {
-  //       throw new Error("Author parameter is missing.");
-  //     }
+  async getAllPostsByAuthor(author) {
+    try {
+      if (!author) {
+        throw new Error("Author parameter is missing.");
+      }
 
-  //     const url = new URL(`${API_SOCIAL_PROFILES}/${author}/posts`);
-  //     url.searchParams.append("_author", "true"); // Include the _author parameter
-  //     url.searchParams.append("_media", "true"); // Include the _author parameter
-  //     url.searchParams.append("_tags", "true"); // Include the _author parameter
-  //     url.searchParams.append("_body", "true"); // Include the _author parameter
-  //     url.searchParams.append("_title", "true"); // Include the _author parameter
-  //     const options = {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${this._getRequiredAccessToken()}`,
-  //         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-  //       },
-  //     };
+      const url = new URL(`${API_SOCIAL_PROFILES}/${author}/posts`);
+      url.searchParams.append("_author", "true"); // Include the _author parameter
+      url.searchParams.append("_media", "true"); // Include the _author parameter
+      url.searchParams.append("_tags", "true"); // Include the _author parameter
+      url.searchParams.append("_body", "true"); // Include the _author parameter
+      url.searchParams.append("_title", "true"); // Include the _author parameter
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this._getRequiredAccessToken()}`,
+          "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+        },
+      };
 
-  //     console.log("Fetching posts by author:", author); // Debugging log
-  //     return await this._request(
-  //       url.toString(),
-  //       options,
-  //       "Error fetching user posts"
-  //     );
-  //   } catch (error) {
-  //     console.error("Error in getAllPostsByAuthor:", error);
-  //     throw error;
-  //   }
-  // }
+      console.log("Fetching posts by author:", author); // Debugging log
+      return await this._request(
+        url.toString(),
+        options,
+        "Error fetching user posts"
+      );
+    } catch (error) {
+      console.error("Error in getAllPostsByAuthor:", error);
+      throw error;
+    }
+  }
 
   async getAllPosts() {
     const accessToken = this._getRequiredAccessToken();
