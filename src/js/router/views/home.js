@@ -1,66 +1,53 @@
 import { authGuard } from "../../utilities/authGuard";
 import { API_SOCIAL_POSTS, API_KEY } from "../../api/constants";
-import { youStoryApi } from "../../api/apiClient";
+import { SocialApi } from "../../api/apiClient";
 // import { renderProfileInfo } from "../../api/profile/logedin.js";
 
 authGuard();
 
-let apiClient = new youStoryApi();
+let apiClient = new SocialApi();
 
-function renderProfileInfo(author) {
-  console.log(author);
-  const profileInfo = document.getElementById("profileInfo");
-  if (!profileInfo) {
-    console.error("Error: #profileInfo container not found in DOM");
-    return;
-  }
-  profileInfo.innerHTML = ""; // Clear existing content
+// Extract the username from the URL query parameters
 
-  if (!author || !author.name || !author.avatar) {
-    console.error("Error: Missing author data in API response");
-    profileInfo.innerHTML = "<p>Profile information is not available.</p>";
-    return;
-  }
+const username = localStorage.getItem("name"); // Get the username from local storage
+
+const profile = await apiClient.getUserProfile(username);
+
+console.log("profile", profile);
+
+function renderProfile(profile) {
+  const profileContainer = document.getElementById("profileInfo");
+
   const authorName = document.createElement("h1");
-  authorName.textContent = author.name;
+  authorName.textContent = profile.data.name;
 
   const profileInfoContainer = document.createElement("div");
   profileInfoContainer.className = "profile-info-container";
 
   const authorAvatar = document.createElement("img");
-  authorAvatar.src = author.avatar.url;
-  authorAvatar.alt = author.avatar.alt || `${author.name}'s avatar`;
+  authorAvatar.src = profile.data.avatar.url;
+  authorAvatar.alt = profile.data.avatar.alt || `${profile.name}'s avatar`;
   authorAvatar.className = "profile-avatar";
 
   const followersAndPostsContainer = document.createElement("div");
   followersAndPostsContainer.className = "followers-postst-count";
 
   const postsCount = document.createElement("p");
-  postsCount.textContent = `Posts: ${author._count.posts}`; // Assuming author object has postsCount property
+  postsCount.textContent = `Posts: ${profile.data._count.posts}`; // Assuming author object has postsCount property
 
   const followersCount = document.createElement("p");
-  followersCount.textContent = `Followers: ${author._count.followers}`; // Assuming author object has followersCount property
+  followersCount.textContent = `Followers: ${profile.data._count.followers}`; // Assuming author object has followersCount property
 
   const followingCount = document.createElement("p");
-  followingCount.textContent = `Following: ${author._count.following}`; // Assuming author object has followingCount property
+  followingCount.textContent = `Following: ${profile.data._count.following}`; // Assuming author object has followingCount property
 
-  // const bannerImage = document.createElement('img');
-  // bannerImage.src = author.banner.url;
-  // bannerImage.alt = author.banner.alt || `${author.name}'s banner`;
-  // bannerImage.className = 'profile-banner';
-  profileInfo.appendChild(profileInfoContainer);
+  profileContainer.appendChild(profileInfoContainer);
   profileInfoContainer.append(authorAvatar, authorName);
-  profileInfo.appendChild(followersAndPostsContainer);
+  profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
-}
+} 
 
-async function handleProfileView() {
-  const author = await apiClient.getUserProfile();
-  console.log(author);
-  renderProfileInfo(author);
-}
-
-handleProfileView();
+renderProfile(profile);
 
 const blogpost = await apiClient.getAllBlogposts();
 console.log(blogpost); // Debugging log

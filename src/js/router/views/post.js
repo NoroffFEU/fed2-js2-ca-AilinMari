@@ -1,47 +1,46 @@
 // alert('Single Post Page');
-import { youStoryApi } from "../../api/apiClient.js";
+import { SocialApi } from "../../api/apiClient.js";
 import { authGuard } from "../../utilities/authGuard.js";
-import { readPostsByUser } from "../../api/post/read.js";
-
+let api = new SocialApi();
 authGuard();
 
 const urlParams = new URLSearchParams(window.location.search);
 
 const postId = urlParams.get("id");
 
-async function getBlogpostByID() {
+async function getPostById() {
   try {
-    let blogPost = await readPostsByUser(postId);
-    return blogPost;
+    let post = await api.getPostById(postId);
+    return post;
   } catch (error) {
-    console.error("Error fetching blogpost", error);
+    console.error("Error fetching post", error);
   }
 }
 
-function renderBlogpostbyId(blogpost) {
+function renderPost(post) {
   const postContainer = document.getElementById(`single-post`);
 
   const userInfo = document.createElement("div");
   userInfo.className = "user-info";
 
   const img = document.createElement("img");
-  img.src = blogpost.data.media?.url;
-  img.alt = blogpost.data.media?.alt;
+  img.src = post.data.media?.url;
+  img.alt = post.data.media?.alt;
   img.className = "post-image";
 
   const postTitle = document.createElement("h1");
-  postTitle.textContent = blogpost.data.title;
+  postTitle.textContent = post.data.title;
   postTitle.className = "post-title";
 
   const postContent = document.createElement("p");
-  postContent.textContent = blogpost.data.body;
+  postContent.textContent = post.data.body;
   postContent.className = "body-text";
 
   const author = document.createElement("p");
-  author.textContent = blogpost.data.author.name;
+  author.textContent = post.data.author.name;
 
   const avatar = document.createElement("img");
-  avatar.src = blogpost.data.author.avatar.url;
+  avatar.src = post.data.author.avatar.url;
   avatar.className = "user-avatar";
 
   postContainer.appendChild(userInfo);
@@ -54,9 +53,9 @@ function renderBlogpostbyId(blogpost) {
 }
 
 async function main() {
-  const blogpost = await getBlogpostByID();
-  console.log(blogpost);
-  renderBlogpostbyId(blogpost);
+  const post = await getPostById();
+  console.log(post);
+  renderPost(post);
 }
 
 main();
@@ -112,5 +111,5 @@ main();
 //   }
 // }
 document.addEventListener("DOMContentLoaded", () => {
-  getBlogpostByID();
+  getPostById();
 });

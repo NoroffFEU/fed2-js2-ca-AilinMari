@@ -11,13 +11,7 @@ export class AuthError extends Error {
   }
 }
 
-export class youStoryApi {
-  constructor() {
-    this.blogName = this.getBlogName();
-    this.blogUrl = `${API_SOCIAL_PROFILES}/${this.blogName}/posts`;
-    this.authUrl = `${API_AUTH}`;
-  }
-
+export class SocialApi {
   /**
    * Helper method for performing fetch requests.
    * @param {string} url - The endpoint URL.
@@ -60,17 +54,31 @@ export class youStoryApi {
     return loggedInUserName ? loggedInUserName : "?_author=true"; // Default value if not found
   }
 
-  getUserProfile() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const author = urlParams.get("author"); // Extract the 'author' query parameter
-
-    if (!author) {
-      console.error("Error: No author specified in the URL.");
-      return;
-    } 
-    return author; // Return the author name
+  async getUserProfile(username) {
+    try {
+      const accessToken = this._getRequiredAccessToken();
+      const url = new URL(`${API_SOCIAL_PROFILES}/${username}`);
+      url.searchParams.append("_followers", "true"); // Include the _author parameter
+      url.searchParams.append("_following", "true"); // Include the _author parameter
+      url.searchParams.append("_posts", "true"); // Include the _author parameter
+      url.searchParams.append("_author", "true"); // Include the _author parameter
+      url.searchParams.append("_avatar", "true"); // Include the _author parameter
+     
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+        },
+      };
+      console.log("username", username); // Debugging API URL
+      return await this._request(url.toString(), options, "Error creating ");
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
-
 
   /**
    * Fetches a single blog post by ID.
@@ -128,6 +136,32 @@ export class youStoryApi {
     return data;
   }
 
+  async getPostById(postId) {
+    try {
+      const accessToken = this._getRequiredAccessToken();
+      const url = new URL(`${API_SOCIAL_POSTS}/${postId}`);
+      url.searchParams.append("_author", "true"); // Include the _author parameter
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+        },
+      };
+
+      return await this._request(
+        url.toString(),
+        options,
+        "Error creating blog post"
+      );
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   /**
    * Creates a new blog post.
    * @param {string} title - The title of the blog post.
@@ -136,21 +170,8 @@ export class youStoryApi {
    * @param {string} [imageAlt="Default image description"] - The media description.
    * @returns {Promise<any>} The created blog post data.
    */
-  async createBlogpost(
-    title,
-    content,
-    imageUrl,
-    imageAlt = "Default image description"
-  ) {
+  async createPost(title, body, tags, media) {
     const accessToken = this._getRequiredAccessToken();
-    const data = {
-      title,
-      body: content,
-      media: {
-        url: imageUrl,
-        alt: imageAlt,
-      },
-    };
 
     const options = {
       method: "POST",
@@ -159,11 +180,11 @@ export class youStoryApi {
         Authorization: `Bearer ${accessToken}`,
         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ title, body, tags, media }),
     };
 
     return await this._request(
-      this.blogUrl,
+      API_SOCIAL_POSTS,
       options,
       "Error creating blog post"
     );
@@ -178,22 +199,10 @@ export class youStoryApi {
    * @param {string} [imageAlt="Default image description"] - The media description.
    * @returns {Promise<any>} The updated blog post data.
    */
-  async updateBlogpost(
-    postId,
-    title,
-    content,
-    imageUrl,
-    imageAlt = "Default image description"
-  ) {
+
+  async updatePost(postId, title, body, tags, media) {
     const accessToken = this._getRequiredAccessToken();
-    const data = {
-      title,
-      body: content,
-      media: {
-        url: imageUrl,
-        alt: imageAlt,
-      },
-    };
+    const data = { title, body, tags, media };
 
     const options = {
       method: "PUT",
@@ -206,9 +215,9 @@ export class youStoryApi {
     };
 
     return await this._request(
-      `${this.blogUrl}/${postId}`,
+      `${API_SOCIAL_POSTS}/${postId}`,
       options,
-      "Error updating blog post"
+      "Error updating post"
     );
   }
 
@@ -217,7 +226,7 @@ export class youStoryApi {
    * @param {string} postId - The ID of the blog post.
    * @returns {Promise<void>}
    */
-  async deleteBlogpost(postId) {
+  async deletePost(postId) {
     const accessToken = this._getRequiredAccessToken();
     const options = {
       method: "DELETE",
@@ -227,9 +236,9 @@ export class youStoryApi {
       },
     };
     try {
-      const errorMessage = "Failed to delete blog post";
-      const response = await fetch(`${this.blogUrl}/${postId}`, options);
+      const response = await fetch(`${API_SOCIAL_POSTS}/${postId}`, options);
       if (!response.ok) {
+        const errorMessage = "Failed to delete blog post";
         throw new Error(`${errorMessage}. Status: ${response.status}`);
       }
       return;
@@ -266,39 +275,6 @@ export class youStoryApi {
     localStorage.setItem("avatar", data.avatar.url);
 
     return data;
-  }
-
-  /**
-   * Fetches the logged-in user's profile information.
-   * @returns {Promise<any>} The user's profile data.
-   */
-  async getUserProfile() {
-    const username = this.getBlogName(); // Get the logged-in user's name
-    const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
-    const accessToken = this._getRequiredAccessToken(); // Retrieve the access token
-
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`, // Include the Authorization header
-        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-      },
-    };
-
-    console.log("Request Headers:", options.headers); // Log headers for debugging
-
-    try {
-      const profileData = await this._request(
-        url,
-        options,
-        "Error fetching user profile"
-      );
-      return profileData.data;
-    } catch (error) {
-      console.error("Error fetching user profile:", error);
-      throw error;
-    }
   }
 
   /**
@@ -345,26 +321,5 @@ export class youStoryApi {
     };
 
     return await this._request(url, options, "Error following user");
-  }
-
-  /**
-   * Fetches a user's profile information by username.
-   * @param {string} username - The username of the user.
-   * @returns {Promise<any>} The user's profile data.
-   */
-  async getUserProfileByUsername(username) {
-    const url = `${API_SOCIAL_PROFILES}/${username}`;
-    const accessToken = this._getRequiredAccessToken();
-
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`,
-      },
-    };
-
-    return await this._request(url, options, "Error fetching user profile");
   }
 }
