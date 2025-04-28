@@ -16,12 +16,16 @@ const profile = await apiClient.getUserProfile(username);
 
 function renderProfile(profile) {
   const profileContainer = document.getElementById("profileInfo");
+  const editButton = document.getElementById("editProfileButton");
 
   const authorName = document.createElement("h1");
   authorName.textContent = profile.data.name;
 
   const profileInfoContainer = document.createElement("div");
   profileInfoContainer.className = "profile-info-container";
+
+  const editProfile = document.createElement("div");
+  editProfile.className = "edit-profile-container";
 
   const authorAvatar = document.createElement("img");
   authorAvatar.src = profile.data.avatar.url;
@@ -44,6 +48,8 @@ function renderProfile(profile) {
   profileInfoContainer.append(authorAvatar, authorName);
   profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
+  profileContainer.appendChild(editProfile);
+  editProfile.appendChild(editButton);
 }
 
 renderProfile(profile);

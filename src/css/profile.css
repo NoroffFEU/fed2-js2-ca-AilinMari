@@ -32,6 +32,14 @@
   padding: 1rem 0;
 }
 
+.edit-profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 0 0;
+}
+
 .profile-info-container {
   display: flex;
   flex-direction: column;
@@ -60,6 +68,53 @@ h1 {
   margin: 0;
 }
 
-/* .container {
-  margin: 5rem 0 0 0;
-} */
+#updateProfileForm {
+  display: none; /* Skjult som standard */
+
+}
+
+.update-profile-input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 0 0;
+}
+
+#editProfileButton {
+  height: 1.5rem;
+  width: 50%;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  background-color: #f0f0f0;
+  padding: 0;
+  justify-self: center;
+  align-self: center;
+}
+
+.updateButton {
+  height: 1.5rem;
+  width: 80%;
+  font-size: 1rem;
+  font-family: "Raleway", sans-serif;
+  background-color: #f0f0f0;
+  padding: 0;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-form-group input {
+  height: 1.5rem;
+  width: 80%;
+}
+
+.profile-form-group label {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0 0;
+}

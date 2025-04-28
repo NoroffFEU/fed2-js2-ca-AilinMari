@@ -74,6 +74,20 @@ updateProfileForm.addEventListener("submit", async (event) => {
   }
 });
 
+const editProfileButton = document.getElementById("editProfileButton");
+
+editProfileButton.addEventListener("click", () => {
+  const form = document.getElementById("updateProfileForm");
+  
+  if (form.style.display === "none" || form.style.display === "") {
+    form.style.display = "block"; // Vis skjemaet
+    editProfileButton.textContent = "Cancel Edit"; // Endre knappetekst
+  } else {
+    form.style.display = "none"; // Skjul skjemaet
+    editProfileButton.textContent = "Edit Profile"; // Tilbake til original
+  }
+});
+
 
 
 

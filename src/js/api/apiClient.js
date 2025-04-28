@@ -346,6 +346,10 @@ export class SocialApi {
     if (data.avatar && typeof data.avatar === 'string') {
       data.avatar = { url: data.avatar };
     }
+
+    if (data.banner && typeof data.banner === 'string') {
+      data.banner = { url: data.banner };
+    }
   
     const options = {
       method: "PUT",

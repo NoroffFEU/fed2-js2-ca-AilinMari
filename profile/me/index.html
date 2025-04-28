@@ -36,18 +36,21 @@
       </div>
     </nav>
     <main>
-      <div id="profileInfo"></div>
+      <div id="profileInfo">
+      <button id="editProfileButton" type="button">Edit Profile</button></div>
+
 
       <form id="updateProfileForm" name="updateProfile">
-        <div class="form-group">
+        <div class="update-profile-input">
+        <div class="profile-form-group">
           <label for="avatar">Avatar URL</label>
           <input id="avatar" type="url" name="avatar" />
         </div>
-        <div class="form-group">
+        <div class="profile-form-group">
           <label for="banner">Banner URL</label>
           <input id="banner" type="url" name="banner" />
-        </div>
-        <button type="submit">Update Profile</button>
+        </div></div>
+        <button class="updateButton" type="submit">Update Profile</button>
       </form>
       <div id="profileFeed"></div>
       <div id="user-links">
