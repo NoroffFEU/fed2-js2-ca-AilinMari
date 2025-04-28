@@ -98,10 +98,37 @@ function renderPosts(posts) {
     content.textContent = post.body;
     content.className = "post-description";
 
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit Post";
+    editButton.className = "edit-post-button";
+    editButton.onclick = () => {
+      window.location.href = `../../post/edit/?id=${post.id}`;
+    };
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete Post";
+    deleteButton.className = "delete-post-button";
+    deleteButton.onclick = async () => {
+      const confirmDelete = confirm("Are you sure you want to delete this post?");
+      if (confirmDelete) {
+        try {
+          await apiClient.deletePost(post.id);
+          alert("Post deleted successfully.");
+          window.location.reload(); // Reload the page to reflect changes
+        } catch (error) {
+          console.error("Error deleting post:", error);
+          alert("Failed to delete post. Please try again.");
+        }
+      }
+    };
+
+
     postContainer.appendChild(img);
     postContainer.appendChild(link);
     postContainer.appendChild(title);
     postContainer.appendChild(content);
+    postContainer.appendChild(editButton);
+    postContainer.appendChild(deleteButton);
     postGrid.appendChild(postContainer);
   });
 }

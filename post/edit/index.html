@@ -31,7 +31,13 @@
     <main>
     <h1>Edit Post</h1>
 
-    <form name="editPost">
+    <form name="updatePost" id="update-post-form">
+      
+      <input id="post-title" placeholder="Title" required />
+      <textarea id="post-body" placeholder="Write your blog post here..." required></textarea>
+      <input id="post-tags" placeholder="Tags (comma-separated)" />
+      <input id="post-image-url" placeholder="Image URL" />
+      <input id="post-image-alt" placeholder="Image description" />
       <button>Edit Post</button>
     </form>
     <div id="user-links">
