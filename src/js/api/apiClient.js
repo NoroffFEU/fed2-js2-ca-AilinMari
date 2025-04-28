@@ -245,36 +245,38 @@ export class SocialApi {
     );
   }
 
-  /**
-   * Updates a blog post by ID.
-   * @param {string} postId - The ID of the blog post.
-   * @param {string} title - The title of the blog post.
-   * @param {string} content - The body content.
-   * @param {string} imageUrl - The URL of the media.
-   * @param {string} [imageAlt="Default image description"] - The media description.
-   * @returns {Promise<any>} The updated blog post data.
-   */
+/**
+ * Updates a blog post by ID.
+ * @param {string} postId - The ID of the blog post.
+ * @param {string} title - The title of the blog post.
+ * @param {string} body - The body content.
+ * @param {Array<string>} tags - Tags for the post.
+ * @param {Object|null} media - The media object (contains url and alt text).
+ * @returns {Promise<any>} The updated blog post data.
+ */
+async updatePost(postId, title, body, tags, media) {
+  const accessToken = this._getRequiredAccessToken();
+  
+  // Prepare the data to send in the request body
+  const data = { title, body, tags, media };
 
-  async updatePost(postId, title, body, tags, media) {
-    const accessToken = this._getRequiredAccessToken();
-    const data = { postId, title, body, tags, media };
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+      "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+    },
+    body: JSON.stringify(data),
+  };
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-      },
-      body: JSON.stringify(data),
-    };
-
-    return await this._request(
-      `${API_SOCIAL_POSTS}/${postId}`,
-      options,
-      "Error updating post"
-    );
-  }
+  // Send the request to the API to update the post
+  return await this._request(
+    `${API_SOCIAL_POSTS}/${postId}`,  // The postId is in the URL
+    options,
+    "Error updating post"
+  );
+}
 
   /**
    * Deletes a blog post by ID.

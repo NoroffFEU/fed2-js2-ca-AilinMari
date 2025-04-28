@@ -67,7 +67,6 @@ updateProfileForm.addEventListener("submit", async (event) => {
   try {
     // Kall funksjonen som oppdaterer profilen
     await updateProfile({ avatarUrl, bannerUrl });
-    alert("Profile updated successfully!");
     window.location.reload(); // Reload the page to reflect changes
   } catch (error) {
     alert("Failed to update profile. See console for details.");
