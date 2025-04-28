@@ -381,28 +381,28 @@ export class SocialApi {
   //   return await this._request(url, options, "Error updating user profile");
   // }
 
-//   /**
-//    * Follows a user by username.
-//    * @param {string} username - The username of the user to follow.
-//    * @returns {Promise<any>} An array of blog posts.
-//    */
-//   async followUser(username) {
-//     const url = `${API_SOCIAL_PROFILES}/${username}/follow`; // Construct the API URL
-//     const accessToken = this._getRequiredAccessToken();
+  /**
+   * Follows a user by username.
+   * @param {string} username - The username of the user to follow.
+   * @returns {Promise<any>} An array of blog posts.
+   */
+  async followUser(username) {
+    const url = `${API_SOCIAL_PROFILES}/${username}/follow`; // Construct the API URL
+    const accessToken = this._getRequiredAccessToken();
 
-//     const options = {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${accessToken}`,
-//         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-//       },
-//       body: JSON.stringify({ username }), // Include the username in the request body
-//     };
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+      },
+     
+    };
 
-//     return await this._request(url, options, "Error following user");
-//   }
-// }
+    return await this._request(url, options, "Error following user");
+  }
+
 
 async searchPosts(query) {
   try {

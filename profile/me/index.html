@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
-<script type="module" src="/src/js/api/profile/update.js"></script>
+    <script type="module" src="/src/js/api/profile/update.js"></script>
     <script type="module" src="/src/js/auth/navHandler.js"></script>
     <script type="module" src="/src/js/auth/logoutHandler.js"></script>
     <link rel="stylesheet" href="/src/css/style.css" />
@@ -32,38 +32,45 @@
         <a href="/profile/me/">My Profile</a>
         <a href="/auth/login/">Login</a>
         <a href="/auth/register/">Register</a>
-
       </div>
     </nav>
     <main>
       <div id="profileInfo">
-      <button id="editProfileButton" type="button">Edit Profile</button></div>
-
+        <button id="editProfileButton" type="button">Edit Profile</button>
+      </div>
 
       <form id="updateProfileForm" name="updateProfile">
         <div class="update-profile-input">
-        <div class="profile-form-group">
-          <label for="avatar">Avatar URL</label>
-          <input id="avatar" type="url" name="avatar" />
+          <div class="profile-form-group">
+            <label for="avatar">Avatar URL</label>
+            <input id="avatar" type="url" name="avatar" />
+          </div>
+          <div class="profile-form-group">
+            <label for="banner">Banner URL</label>
+            <input id="banner" type="url" name="banner" />
+          </div>
         </div>
-        <div class="profile-form-group">
-          <label for="banner">Banner URL</label>
-          <input id="banner" type="url" name="banner" />
-        </div></div>
         <button class="updateButton" type="submit">Update Profile</button>
       </form>
       <div id="profileFeed"></div>
       <div id="user-links">
         <div class="links">
           <div class="searchbar">
-            <input type="text" id="search" placeholder="Search for posts..." class="hidden">
+            <input
+              type="text"
+              id="search"
+              placeholder="Search for posts..."
+              class="hidden"
+            />
             <button id="search-button">
               <i class="fas fa-search"></i>
             </button>
           </div>
           <div id="search-results"></div>
           <div class="create-sign"><a href="/post/create/">+</a></div>
-          <div class="home"><a href="/"><i class="fas fa-home"></i></a></div>
+          <div class="home">
+            <a href="/"><i class="fas fa-home"></i></a>
+          </div>
         </div>
       </div>
     </main>

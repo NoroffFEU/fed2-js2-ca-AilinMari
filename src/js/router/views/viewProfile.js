@@ -56,10 +56,25 @@ function renderProfile(profile) {
   const followingCount = document.createElement("p");
   followingCount.textContent = `Following: ${profile.data._count.following}`;
 
+  const followButton = document.createElement("button");
+  followButton.id = "follow-button";
+  followButton.textContent = "Follow";
+
   profileContainer.appendChild(profileInfoContainer);
   profileInfoContainer.append(authorAvatar, authorName);
   profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
+  profileContainer.appendChild(followButton);
+  followButton.addEventListener("click", async () => {
+    try {
+      await apiClient.followUser(profile.data.name); // Pass på at du sender riktig username
+    //   alert("You are now following " + profile.data.name + "!");
+      window.location.reload(); // Reload the page to reflect the changes
+    } catch (error) {
+      console.error("Error following user:", error);
+    //   alert("Failed to follow user.");
+    }
+  });
 }
 
 async function fetchAndRenderPosts(author) {
@@ -112,6 +127,7 @@ function renderPosts(posts) {
     postGrid.appendChild(postContainer);
   });
 }
+
 
 // import { authGuard } from "../../utilities/authGuard.js";
 // import { SocialApi } from "../../api/apiClient.js";
