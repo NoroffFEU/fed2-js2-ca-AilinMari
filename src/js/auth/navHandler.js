@@ -1,3 +1,7 @@
+import { SocialApi } from "../api/apiClient.js";
+import { API_SOCIAL_POSTS, API_KEY } from "../api/constants";
+const apiClient = new SocialApi();
+
 // Check if the user is logged in
 const token = localStorage.getItem("token");
 
@@ -25,27 +29,58 @@ if (token) {
   userLinks.style.display = "none";
 }
 
-const searchInput = document.querySelector("#search");
-const searchButton = document.querySelector("#search-button");
+const searchInput = document.getElementById("search");
+const searchButton = document.getElementById("search-button");
+const resultsContainer = document.getElementById("search-results");
 
-if (searchButton) {
-  searchButton.addEventListener("click", () => {
-    if (searchInput.style.display === "none" || !searchInput.style.display) {
-      // First click: Show the search input
-      searchInput.style.display = "inline-block";
-      searchInput.focus(); // Focus the input for user convenience
-    } else {
-      // Second click: Perform the search
-      const query = searchInput.value.trim();
-      if (query) {
-        // Redirect to the profile page with the author query parameter
-        window.location.href = `/profile/view/?author=${encodeURIComponent(query)}`;
-      } else {
-        alert("Please enter a username to search.");
-      }
-    }
+async function handleSearch() {
+  const query = searchInput.value.trim();
+
+  if (!query) {
+    alert("Please enter a search term.");
+    return;
+  }
+
+  try {
+    const response = await apiClient.searchPosts(query);
+    const posts = response.data; // 👈 Endring her
+    renderSearchResults(posts);
+  } catch (error) {
+    console.error("Error searching for posts:", error);
+    resultsContainer.innerHTML = "<p>No posts found</p>";
+  }
+}
+
+
+// Funksjon for å vise søkeresultatene
+function renderSearchResults(posts) {
+  resultsContainer.innerHTML = "";
+
+  if (posts.length === 0) {
+    resultsContainer.innerHTML = "<p>No posts found.</p>";
+    return;
+  }
+
+  posts.forEach((post) => {
+    const link = document.createElement("a");
+    link.classList.add("post-card");
+    link.href = `../../post/?id=${post.id}`; // Link til enkeltpost-siden
+    link.innerHTML = `
+
+      <img src="${post.media.url}" alt="${post.media.alt || `${post.title}'s image`}" class="post-image" />
+          <h4>${post.title}</h4>
+      `;
+    resultsContainer.appendChild(link);
   });
 }
 
-// Ensure the search input is hidden by default
-searchInput.style.display = "none";
+// Event listeners
+searchButton.addEventListener("click", handleSearch);
+
+// Ekstra: La brukeren søke ved å trykke Enter også
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSearch();
+  }
+});
+

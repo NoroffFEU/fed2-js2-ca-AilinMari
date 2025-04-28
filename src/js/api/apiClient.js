@@ -377,25 +377,49 @@ export class SocialApi {
   //   return await this._request(url, options, "Error updating user profile");
   // }
 
-  /**
-   * Follows a user by username.
-   * @param {string} username - The username of the user to follow.
-   * @returns {Promise<any>} An array of blog posts.
-   */
-  async followUser(username) {
-    const url = `${API_SOCIAL_PROFILES}/${username}/follow`; // Construct the API URL
+//   /**
+//    * Follows a user by username.
+//    * @param {string} username - The username of the user to follow.
+//    * @returns {Promise<any>} An array of blog posts.
+//    */
+//   async followUser(username) {
+//     const url = `${API_SOCIAL_PROFILES}/${username}/follow`; // Construct the API URL
+//     const accessToken = this._getRequiredAccessToken();
+
+//     const options = {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${accessToken}`,
+//         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+//       },
+//       body: JSON.stringify({ username }), // Include the username in the request body
+//     };
+
+//     return await this._request(url, options, "Error following user");
+//   }
+// }
+
+async searchPosts(query) {
+  try {
     const accessToken = this._getRequiredAccessToken();
+    const url = new URL(`${API_SOCIAL_POSTS}/search`);
+    url.searchParams.append("q", query);
 
     const options = {
-      method: "PUT",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+        "X-Noroff-API-Key": `${API_KEY}`,
       },
-      body: JSON.stringify({ username }), // Include the username in the request body
     };
 
-    return await this._request(url, options, "Error following user");
+    console.log("Searching posts with query:", query);
+    return await this._request(url.toString(), options, "Error searching posts");
+  } catch (error) {
+    console.error("Error in searchPosts:", error);
+    throw error;
   }
+}
 }
