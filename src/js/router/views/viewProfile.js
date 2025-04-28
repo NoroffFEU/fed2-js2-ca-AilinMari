@@ -4,22 +4,22 @@ import { SocialApi } from "../../api/apiClient.js";
 authGuard();
 
 const apiClient = new SocialApi();
-
 const urlParams = new URLSearchParams(window.location.search);
-const profile = urlParams.get("author");
+const profileUsername = urlParams.get("author");
+let loggedInUsername = localStorage.getItem("name"); // Henter ditt brukernavn
 
-if (!profile) {
+if (!profileUsername) {
   console.error("Error: No author specified in the URL.");
 } else {
-  fetchAndRenderProfile(profile);
-  fetchAndRenderPosts(profile);
+  fetchAndRenderProfile(profileUsername);
+  fetchAndRenderPosts(profileUsername);
 }
 
 async function fetchAndRenderProfile(author) {
   try {
     const profileData = await apiClient.getUserProfileByAuthor(author);
     console.log("Fetched profile:", profileData);
-    renderProfile(profileData);
+    renderProfile(profileData.data);
   } catch (error) {
     console.error("Error fetching profile:", error);
   }
@@ -31,50 +31,65 @@ function renderProfile(profile) {
     console.error("Error: #view-profile not found in DOM");
     return;
   }
-
-  const authorName = document.createElement("h1");
-  authorName.textContent = profile.data?.name;
+  profileContainer.innerHTML = ""; // Viktig å tømme container først!
 
   const profileInfoContainer = document.createElement("div");
   profileInfoContainer.className = "profile-info-container";
 
   const authorAvatar = document.createElement("img");
-  authorAvatar.src = profile.data?.avatar.url;
-  authorAvatar.alt =
-    profile.data?.avatar.alt || `${profile.data.name}'s avatar`;
+  authorAvatar.src = profile.avatar?.url;
+  authorAvatar.alt = profile.avatar?.alt || `${profile.name}'s avatar`;
   authorAvatar.className = "profile-avatar";
+
+  const authorName = document.createElement("h1");
+  authorName.textContent = profile.name;
 
   const followersAndPostsContainer = document.createElement("div");
   followersAndPostsContainer.className = "followers-posts-count";
 
   const postsCount = document.createElement("p");
-  postsCount.textContent = `Posts: ${profile.data._count.posts}`;
+  postsCount.textContent = `Posts: ${profile._count?.posts}`;
 
   const followersCount = document.createElement("p");
-  followersCount.textContent = `Followers: ${profile.data._count.followers}`;
+  followersCount.textContent = `Followers: ${profile._count?.followers}`;
 
   const followingCount = document.createElement("p");
-  followingCount.textContent = `Following: ${profile.data._count.following}`;
+  followingCount.textContent = `Following: ${profile._count?.following}`;
+
+
+  let isFollowing = profile.followers?.some(
+    (follower) => follower.name === loggedInUsername
+  );
 
   const followButton = document.createElement("button");
   followButton.id = "follow-button";
-  followButton.textContent = "Follow";
+  followButton.textContent = isFollowing ? "Unfollow" : "Follow";
 
+  followButton.addEventListener("click", async () => {
+    followButton.disabled = true; // Deaktiver knappen mens vi venter
+    try {
+      if (!isFollowing) {
+        await apiClient.followUser(profile.name);
+        // alert(`You are now following ${profile.name}`);
+      } else {
+        await apiClient.unfollowUser(profile.name);
+        // alert(`You unfollowed ${profile.name}`);
+      }
+      await fetchAndRenderProfile(profile.name); // Henter profilen på nytt etter endring
+    } catch (error) {
+      console.error("Error updating follow status:", error);
+      alert("Something went wrong. Try again.");
+    } finally {
+      followButton.disabled = false;
+    }
+  });
+
+  // Sett sammen elementene
   profileContainer.appendChild(profileInfoContainer);
   profileInfoContainer.append(authorAvatar, authorName);
   profileContainer.appendChild(followersAndPostsContainer);
   followersAndPostsContainer.append(postsCount, followersCount, followingCount);
   profileContainer.appendChild(followButton);
-  followButton.addEventListener("click", async () => {
-    try {
-      await apiClient.followUser(profile.data.name); // Pass på at du sender riktig username
-    //   alert("You are now following " + profile.data.name + "!");
-      window.location.reload(); // Reload the page to reflect the changes
-    } catch (error) {
-      console.error("Error following user:", error);
-    //   alert("Failed to follow user.");
-    }
-  });
 }
 
 async function fetchAndRenderPosts(author) {
@@ -108,8 +123,8 @@ function renderPosts(posts) {
     link.href = `../../post/?id=${post.id}`;
 
     const img = document.createElement("img");
-    img.src = post.media.url;
-    img.alt = post.media.alt || `${post.title}'s image`;
+    img.src = post.media?.url;
+    img.alt = post.media?.alt || `${post.title}'s image`;
     img.className = "post-image";
 
     const title = document.createElement("h2");
@@ -127,7 +142,6 @@ function renderPosts(posts) {
     postGrid.appendChild(postContainer);
   });
 }
-
 
 // import { authGuard } from "../../utilities/authGuard.js";
 // import { SocialApi } from "../../api/apiClient.js";

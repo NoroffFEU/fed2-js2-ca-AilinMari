@@ -1,4 +1,9 @@
-import { API_BASE_URL, API_AUTH, API_AUTH_LOGIN, API_KEY } from "./constants.js"; // Import API_BASE_URL
+import {
+  API_BASE_URL,
+  API_AUTH,
+  API_AUTH_LOGIN,
+  API_KEY,
+} from "./constants.js"; // Import API_BASE_URL
 import { API_SOCIAL_PROFILES, API_SOCIAL_POSTS } from "./constants.js";
 import { headers } from "./headers.js";
 
@@ -25,7 +30,9 @@ export class SocialApi {
       const response = await fetch(url, options);
       if (!response.ok) {
         const errorDetails = await response.text();
-        throw new Error(`${errorMessage}. Status: ${response.status}. Details: ${errorDetails}`);
+        throw new Error(
+          `${errorMessage}. Status: ${response.status}. Details: ${errorDetails}`
+        );
       }
       return await response.json();
     } catch (error) {
@@ -33,7 +40,6 @@ export class SocialApi {
       throw error;
     }
   }
-
 
   /**
    * Retrieves the access token from local storage.
@@ -146,28 +152,25 @@ export class SocialApi {
     const accessToken = this._getRequiredAccessToken();
     const username = localStorage.getItem("name"); // Get the username from local storage
     const url = new URL(`${API_SOCIAL_PROFILES}/${username}/posts`);
-  
+
     const options = {
-      method: "GET",  
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
       },
     };
-    
+
     // Rettet: Bruk username i loggen i stedet for author
     console.log("Fetching posts by username:", username); // Debugging log
-    
+
     return await this._request(
       url.toString(),
       options,
       "Error fetching user posts"
     );
-  } 
-
-  
-
+  }
 
   async getAllPosts() {
     const accessToken = this._getRequiredAccessToken();
@@ -341,16 +344,16 @@ export class SocialApi {
     const username = localStorage.getItem("name"); // Get the username from local storage
     const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
     const accessToken = this._getRequiredAccessToken();
-  
+
     // Ensuring the avatar is formatted correctly as an object
-    if (data.avatar && typeof data.avatar === 'string') {
+    if (data.avatar && typeof data.avatar === "string") {
       data.avatar = { url: data.avatar };
     }
 
-    if (data.banner && typeof data.banner === 'string') {
+    if (data.banner && typeof data.banner === "string") {
       data.banner = { url: data.banner };
     }
-  
+
     const options = {
       method: "PUT",
       headers: {
@@ -360,7 +363,7 @@ export class SocialApi {
       },
       body: JSON.stringify(data),
     };
-  
+
     return await this._request(url, options, "Error updating user profile");
   }
   // async updateUserProfile(data) {
@@ -397,33 +400,52 @@ export class SocialApi {
         Authorization: `Bearer ${accessToken}`,
         "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
       },
-     
     };
 
     return await this._request(url, options, "Error following user");
   }
 
-
-async searchPosts(query) {
-  try {
+  async unfollowUser(username) {
+    const url = `${API_SOCIAL_PROFILES}/${username}/unfollow`;
     const accessToken = this._getRequiredAccessToken();
-    const url = new URL(`${API_SOCIAL_POSTS}/search`);
-    url.searchParams.append("q", query);
 
     const options = {
-      method: "GET",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": `${API_KEY}`,
+        "X-Noroff-API-Key": API_KEY,
       },
+      // Ingen body her heller
     };
 
-    console.log("Searching posts with query:", query);
-    return await this._request(url.toString(), options, "Error searching posts");
-  } catch (error) {
-    console.error("Error in searchPosts:", error);
-    throw error;
+    return await this._request(url, options, "Error unfollowing user");
   }
-}
+
+  async searchPosts(query) {
+    try {
+      const accessToken = this._getRequiredAccessToken();
+      const url = new URL(`${API_SOCIAL_POSTS}/search`);
+      url.searchParams.append("q", query);
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+          "X-Noroff-API-Key": `${API_KEY}`,
+        },
+      };
+
+      console.log("Searching posts with query:", query);
+      return await this._request(
+        url.toString(),
+        options,
+        "Error searching posts"
+      );
+    } catch (error) {
+      console.error("Error in searchPosts:", error);
+      throw error;
+    }
+  }
 }
