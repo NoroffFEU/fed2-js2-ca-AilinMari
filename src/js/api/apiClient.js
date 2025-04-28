@@ -24,13 +24,16 @@ export class SocialApi {
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
-        throw new Error(`${errorMessage}. Status: ${response.status}`);
+        const errorDetails = await response.text();
+        throw new Error(`${errorMessage}. Status: ${response.status}. Details: ${errorDetails}`);
       }
       return await response.json();
     } catch (error) {
+      console.error("Request error:", error);
       throw error;
     }
   }
+
 
   /**
    * Retrieves the access token from local storage.
@@ -139,6 +142,33 @@ export class SocialApi {
     }
   }
 
+  async getPostsByLoggedInUser() {
+    const accessToken = this._getRequiredAccessToken();
+    const username = localStorage.getItem("name"); // Get the username from local storage
+    const url = new URL(`${API_SOCIAL_PROFILES}/${username}/posts`);
+  
+    const options = {
+      method: "GET",  
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+      },
+    };
+    
+    // Rettet: Bruk username i loggen i stedet for author
+    console.log("Fetching posts by username:", username); // Debugging log
+    
+    return await this._request(
+      url.toString(),
+      options,
+      "Error fetching user posts"
+    );
+  } 
+
+  
+
+
   async getAllPosts() {
     const accessToken = this._getRequiredAccessToken();
     const options = {
@@ -224,7 +254,7 @@ export class SocialApi {
 
   async updatePost(postId, title, body, tags, media) {
     const accessToken = this._getRequiredAccessToken();
-    const data = { title, body, tags, media };
+    const data = { postId, title, body, tags, media };
 
     const options = {
       method: "PUT",
@@ -260,7 +290,7 @@ export class SocialApi {
     try {
       const response = await fetch(`${API_SOCIAL_POSTS}/${postId}`, options);
       if (!response.ok) {
-        const errorMessage = "Failed to delete blog post";
+        const errorMessage = "Failed to delete post";
         throw new Error(`${errorMessage}. Status: ${response.status}`);
       }
       return;
@@ -306,11 +336,17 @@ export class SocialApi {
    * @param {string} banner - The new banner URL.
    * @returns {Promise<any>} The updated profile data.
    */
+
   async updateUserProfile(data) {
     const username = localStorage.getItem("name"); // Get the username from local storage
     const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
     const accessToken = this._getRequiredAccessToken();
-
+  
+    // Ensuring the avatar is formatted correctly as an object
+    if (data.avatar && typeof data.avatar === 'string') {
+      data.avatar = { url: data.avatar };
+    }
+  
     const options = {
       method: "PUT",
       headers: {
@@ -320,9 +356,26 @@ export class SocialApi {
       },
       body: JSON.stringify(data),
     };
-
+  
     return await this._request(url, options, "Error updating user profile");
   }
+  // async updateUserProfile(data) {
+  //   const username = localStorage.getItem("name"); // Get the username from local storage
+  //   const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
+  //   const accessToken = this._getRequiredAccessToken();
+
+  //   const options = {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`,
+  //       "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+  //     },
+  //     body: JSON.stringify(data),
+  //   };
+
+  //   return await this._request(url, options, "Error updating user profile");
+  // }
 
   /**
    * Follows a user by username.

@@ -5,29 +5,45 @@ import { API_KEY } from "../constants";
 
 const apiClient = new SocialApi();
 
+// Funksjon for å oppdatere profilen med avatar og banner
 async function updateProfile({ avatarUrl, bannerUrl }) {
   try {
-    const updatedData = {
-      avatar: avatarUrl,
-      banner: bannerUrl,
-    };
+    const updates = [];
 
-    const updatedProfile = await apiClient.updateUserProfile(updatedData);
-    console.log("Updated profile:", updatedProfile);
+    // Hvis avatarUrl er satt, oppdater avatar
+    if (avatarUrl) {
+      const avatarUpdate = { avatar: avatarUrl };
+      console.log("Sender avatar update:", avatarUpdate);
+      updates.push(apiClient.updateUserProfile(avatarUpdate));
+    }
 
-    if (updatedProfile.avatar) {
-      localStorage.setItem("avatar", updatedProfile.avatar);
+    // Hvis bannerUrl er satt, oppdater banner
+    if (bannerUrl) {
+      const bannerUpdate = { banner: bannerUrl };
+      console.log("Sender banner update:", bannerUpdate);
+      updates.push(apiClient.updateUserProfile(bannerUpdate));
+    }
+
+    // Kjør alle oppdateringer parallelt
+    const results = await Promise.all(updates);
+
+    const latestProfile = results[results.length - 1];
+    console.log("Updated profile:", latestProfile);
+
+    // Oppdater localStorage
+    if (latestProfile.avatar) {
+      localStorage.setItem("avatar", latestProfile.avatar);
     } else {
       localStorage.removeItem("avatar");
     }
 
-    if (updatedProfile.banner) {
-      localStorage.setItem("banner", updatedProfile.banner);
+    if (latestProfile.banner) {
+      localStorage.setItem("banner", latestProfile.banner);
     } else {
       localStorage.removeItem("banner");
     }
 
-    return updatedProfile;
+    return latestProfile;
 
   } catch (error) {
     console.error("Error updating profile:", error);
@@ -35,27 +51,28 @@ async function updateProfile({ avatarUrl, bannerUrl }) {
   }
 }
 
-// Nå: Koble til form-skjemaet
-const form = document.getElementById("updateProfileForm");
+// Hent form-elementet for oppdatering av profil
+const updateProfileForm = document.getElementById("updateProfileForm");
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault(); // Hindrer at skjemaet reload-er siden
+// Event listener for form submission
+updateProfileForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
+  // Hent avatar og banner URL fra skjemaet
   const avatarUrl = document.getElementById("avatar").value.trim();
   const bannerUrl = document.getElementById("banner").value.trim();
 
+  console.log("Form data:", { avatarUrl, bannerUrl });
+
   try {
+    // Kall funksjonen som oppdaterer profilen
     await updateProfile({ avatarUrl, bannerUrl });
-    alert("Profilen ble oppdatert!");
-    form.reset(); // Tømmer feltene etter vellykket oppdatering (valgfritt)
+    alert("Profile updated successfully!");
+    window.location.reload(); // Reload the page to reflect changes
   } catch (error) {
-    alert("Noe gikk galt under oppdateringen.");
+    alert("Failed to update profile. See console for details.");
   }
 });
-
-
-
-
 
 
 

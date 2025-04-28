@@ -47,3 +47,56 @@ function renderProfile(profile) {
 }
 
 renderProfile(profile);
+
+
+async function fetchAndRenderPosts(author) {
+  try {
+    const posts = await apiClient.getPostsByLoggedInUser(author);
+    console.log("Fetched posts:", posts);
+    renderPosts(posts.data);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+  }
+}
+
+function renderPosts(posts) {
+  const postGrid = document.getElementById("profileFeed");
+  if (!postGrid) {
+    console.error("Error: #profileFeed not found in DOM");
+    return;
+  }
+  postGrid.innerHTML = "";
+
+  if (!Array.isArray(posts) || posts.length === 0) {
+    postGrid.innerHTML = "<p>No blog posts available.</p>";
+    return;
+  }
+
+  posts.forEach((post) => {
+    const postContainer = document.createElement("div");
+    postContainer.className = "container";
+
+    const link = document.createElement("a");
+    link.href = `../../post/?id=${post.id}`;
+
+    const img = document.createElement("img");
+    img.src = post.media.url;
+    img.alt = post.media.alt || `${post.title}'s image`;
+    img.className = "post-image";
+
+    const title = document.createElement("h2");
+    title.textContent = post.title;
+    title.className = "post-title";
+
+    const content = document.createElement("p");
+    content.textContent = post.body;
+    content.className = "post-description";
+
+    postContainer.appendChild(img);
+    postContainer.appendChild(link);
+    postContainer.appendChild(title);
+    postContainer.appendChild(content);
+    postGrid.appendChild(postContainer);
+  });
+}
+fetchAndRenderPosts(profile);
