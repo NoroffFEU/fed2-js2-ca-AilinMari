@@ -1,5 +1,6 @@
 import { SocialApi } from "../api/apiClient.js";
 import { API_SOCIAL_POSTS, API_KEY } from "../api/constants";
+
 const apiClient = new SocialApi();
 
 // Check if the user is logged in
@@ -32,9 +33,26 @@ if (token) {
 const searchInput = document.getElementById("search");
 const searchButton = document.getElementById("search-button");
 const resultsContainer = document.getElementById("search-results");
+const searchbar = document.querySelector(".searchbar"); // Søkebaren som inneholder input og knapp
+
+let searchResultsVisible = false;
+let searchInputVisible = false;
 
 async function handleSearch() {
+  if (!searchInputVisible) {
+    searchInput.classList.remove("hidden");
+    searchInput.focus();
+    searchInputVisible = true;
+    return;
+  }
+
   const query = searchInput.value.trim();
+
+  if (searchResultsVisible) {
+    resultsContainer.innerHTML = "";
+    searchResultsVisible = false;
+    return;
+  }
 
   if (!query) {
     alert("Please enter a search term.");
@@ -43,16 +61,16 @@ async function handleSearch() {
 
   try {
     const response = await apiClient.searchPosts(query);
-    const posts = response.data; // 👈 Endring her
+    const posts = response.data;
     renderSearchResults(posts);
+    searchResultsVisible = true;
   } catch (error) {
     console.error("Error searching for posts:", error);
     resultsContainer.innerHTML = "<p>No posts found</p>";
+    searchResultsVisible = false;
   }
 }
 
-
-// Funksjon for å vise søkeresultatene
 function renderSearchResults(posts) {
   resultsContainer.innerHTML = "";
 
@@ -64,23 +82,28 @@ function renderSearchResults(posts) {
   posts.forEach((post) => {
     const link = document.createElement("a");
     link.classList.add("post-card");
-    link.href = `../../post/?id=${post.id}`; // Link til enkeltpost-siden
+    link.href = `../../post/?id=${post.id}`;
     link.innerHTML = `
-
       <img src="${post.media.url}" alt="${post.media.alt || `${post.title}'s image`}" class="post-image" />
-          <h4>${post.title}</h4>
-      `;
+      <h4>${post.title}</h4>
+    `;
     resultsContainer.appendChild(link);
   });
 }
 
-// Event listeners
 searchButton.addEventListener("click", handleSearch);
 
-// Ekstra: La brukeren søke ved å trykke Enter også
+// Enter-søk
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     handleSearch();
   }
 });
 
+// Legg til event listener for å lukke søkefeltet når du klikker utenfor
+document.addEventListener("click", (event) => {
+  if (!searchbar.contains(event.target)) {
+    searchInput.classList.add("hidden");
+    searchInputVisible = false;
+  }
+});
