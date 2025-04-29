@@ -31,7 +31,6 @@
         <a href="/profile/me/">My Profile</a>
         <a href="/auth/login/">Login</a>
         <a href="/auth/register/">Register</a>
-
       </div>
     </nav>
     <main>
@@ -42,15 +41,23 @@
       <div id="user-links">
         <div class="links">
           <div class="searchbar">
-            <input type="text" id="search" placeholder="Search for posts..." class="hidden">
             <button id="search-button">
               <i class="fas fa-search"></i>
             </button>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search for posts..."
+              class="hidden"
+            />
           </div>
           <div id="search-results"></div>
           <div class="create-sign"><a href="/post/create/">+</a></div>
-          <div class="home"><a href="/"><i class="fas fa-home"></i></a></div>
+          <div class="home">
+            <a href="/"><i class="fas fa-home"></i></a>
+          </div>
         </div>
+      </div>
     </main>
     <footer>
       <div id="footer-content">

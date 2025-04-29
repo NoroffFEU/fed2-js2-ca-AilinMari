@@ -25,34 +25,44 @@
         <a href="/profile/me/">My Profile</a>
         <a href="/auth/login/">Login</a>
         <a href="/auth/register/">Register</a>
-
       </div>
     </nav>
     <main>
-      
-    <h1>Edit Post</h1>
+      <h1>Edit Post</h1>
 
-    <form name="updatePost" id="update-post-form">
-      <input id="post-title" placeholder="Title" required />
-      <textarea id="post-body" placeholder="Write your blog post here..." required></textarea>
-      <input id="post-tags" placeholder="Tags (comma-separated)" />
-      <input id="post-image-url" placeholder="Image URL" />
-      <input id="post-image-alt" placeholder="Image description" />
-      <button>Edit Post</button>
-    </form>
-    <div id="user-links">
-      <div class="links">
-        <div class="searchbar">
-          <input type="text" id="search" placeholder="Search for posts..." class="hidden">
-          <button id="search-button">
-            <i class="fas fa-search"></i> 
-          </button>
+      <form name="updatePost" id="update-post-form">
+        <input id="post-title" placeholder="Title" required />
+        <textarea
+          id="post-body"
+          placeholder="Write your blog post here..."
+          required
+        ></textarea>
+        <input id="post-tags" placeholder="Tags (comma-separated)" />
+        <input id="post-image-url" placeholder="Image URL" />
+        <input id="post-image-alt" placeholder="Image description" />
+        <button>Edit Post</button>
+      </form>
+      <div id="user-links">
+        <div class="links">
+          <div class="searchbar">
+            <button id="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search for posts..."
+              class="hidden"
+            />
+          </div>
+          <div id="search-results"></div>
+          <div class="create-sign"><a href="/post/create/">+</a></div>
+          <div class="home">
+            <a href="/"><i class="fas fa-home"></i></a>
+          </div>
         </div>
-        <div id="search-results"></div>
-        <div class="create-sign"><a href="/post/create/">+</a></div>
-        <div class="home"><a href="/"><i class="fas fa-home"></i></a></div>
       </div>
-  </main>
+    </main>
     <footer>
       <div id="footer-content">
         <p>© 2023 Youstory. All rights reserved.</p>
