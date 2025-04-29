@@ -18,6 +18,7 @@ if (token) {
   // User is not logged in, ensure "Login" and "Register" links are visible
   if (loginLink) loginLink.style.display = "block";
   if (registerLink) registerLink.style.display = "block";
+
 }
 
 const userLinks = document.querySelector("#user-links");

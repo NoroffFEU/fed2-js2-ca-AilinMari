@@ -1,12 +1,12 @@
 import { SocialApi } from "../../api/apiClient.js";
 
 const apiClient = new SocialApi();
-
+const repoUrl = window.location.origin; // Get the base URL of the repository
 export async function createPost() {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("You must be logged in to create a post.");
-    window.location.href = "/auth/login/";
+    window.location.href = repoUrl + "/auth/login/";
     return;
   }
 
