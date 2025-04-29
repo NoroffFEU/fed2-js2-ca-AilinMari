@@ -90,6 +90,9 @@ function renderPosts(posts) {
     img.alt = post.media.alt || `${post.title}'s image`;
     img.className = "post-image";
 
+    const imageContainer = document.createElement("div");
+    imageContainer.className = "image-container";
+
     const title = document.createElement("h2");
     title.textContent = post.title;
     title.className = "post-title";
@@ -100,6 +103,9 @@ function renderPosts(posts) {
 
     const userButtons = document.createElement("div");
     userButtons.className = "user-buttons";
+
+    const contentContainer = document.createElement("div");
+    contentContainer.className = "content-container";
 
     const editButton = document.createElement("button");
     editButton.textContent = "Edit Post";
@@ -126,10 +132,12 @@ function renderPosts(posts) {
     };
 
 
-    postContainer.appendChild(img);
+    imageContainer.appendChild(img);
+    postContainer.appendChild(imageContainer);
+    postContainer.appendChild(contentContainer);
     postContainer.appendChild(link);
-    postContainer.appendChild(title);
-    postContainer.appendChild(content);
+    contentContainer.appendChild(title);
+    contentContainer.appendChild(content);
     postContainer.appendChild(userButtons);
     userButtons.appendChild(editButton);
     userButtons.appendChild(deleteButton);

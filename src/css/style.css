@@ -235,20 +235,7 @@ form label {
   background-color: black; /* Optional: Add a background color */
   z-index: 1000; /* Ensure it stays above other elements */
   box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
-  padding: 0.5rem 0; /* Add padding for spacing */
-}
-
-#search-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); /* Responsive grid layout */
-  position: fixed;
-  bottom: 3.5rem;
-  left: 0;
-  width: 100%;
-  background-color: black; /* Optional: Add a background color */
-  z-index: 1000; /* Ensure it stays above other elements */
-  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
-  padding: 0.5rem 0; /* Add padding for spacing */
+  padding: 0.8rem 0 0.5rem 0; /* Add padding for spacing */
 }
 
 .hidden {
@@ -256,20 +243,48 @@ form label {
 }
 
 .searchbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
   padding: 0rem;
   margin: 0;
 }
 
+#user-links .links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.links .home {
+  justify-self: center;
+}
+
+.links .searchbar {
+  justify-self: center;
+}
+
+.links .create-sign {
+  justify-self: center;
+}
+
 #search {
-  /* padding: 0.5rem; */
-  font-size: 1rem;
-border-radius: 5px;
-border: none;
-max-width: 50%;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  border: none;
+  /* width: 65%; */
+}
+
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(10rem, 1fr)
+  ); /* Responsive grid layout */
+  position: fixed;
+  bottom: 3.8rem;
+  left: 0;
+  width: 100%;
+  background-color: black; /* Optional: Add a background color */
+  z-index: 1000; /* Ensure it stays above other elements */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+  padding: 0.5rem 0; /* Add padding for spacing */
 }
 
 #search-results h4 {
@@ -286,23 +301,23 @@ max-width: 50%;
 }
 
 #search-results a {
-display: flex;
-flex-direction: row;
-align-items: center;
-text-align: start;
-gap: 0.5rem;
-margin: 0.5rem;
-box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: start;
+  gap: 0.5rem;
+  margin: 0.5rem;
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
 }
-
 
 .links {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 3rem;
-  width: 100%;
+  margin: 0 1rem 0 1rem;
+  position: relative;
+  /* width: 100%; */
 }
 
 .links .home {
@@ -313,12 +328,8 @@ box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1); /* Optional shadow for 
   width: fit-content;
   background-color: black;
   color: pink;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
-
-/* #search {
-  display: none;
-} */
 
 .create-sign {
   max-width: fit-content;
@@ -328,6 +339,7 @@ box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1); /* Optional shadow for 
   font-weight: 600;
   font-family: "sans-serif";
   font-size: 2rem;
+  position: sticky;
 }
 
 .nav-links {
@@ -402,8 +414,6 @@ footer {
 
 @media (min-width: 1000px) {
   body {
-    margin: 0 10rem;
-    /* padding: 0; */
     height: fit-content;
   }
 
@@ -415,53 +425,23 @@ footer {
 
   main {
     margin-top: 2rem;
-    width: fit-content;
+    /* width: fit-content; */
+  }
+
+  #user-links .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .links .home {
+    justify-self: center;
+  }
+
+  .links .searchbar {
+    justify-self: center;
+  }
+
+  .links .create-sign {
+    justify-self: center;
   }
 }
-
-/* Adjustments for mobile view */
-/* @media (max-width: 768px) {
-  body {
-    margin: 0;
-    padding: 0;
-    height: fit-content;
-  }
-
-  h1 {
-    text-align: center;
-  }
-
-  nav {
-    width: 100%;
-    align-items: center;
-  }
-
-  .hamburger {
-    align-self: flex-end;
-  }
-
-  .nav-links {
-    width: 100%;
-    align-items: flex-end;
-  }
-
-  nav a,
-  nav button {
-    font-size: 1rem;
-    padding: 0.5rem;
-    text-align: center;
-  }
-
-  .noroff-logo img {
-    max-width: 8rem;
-  }
-
-  main {
-    margin-top: 2rem;
-    width: 100%;
-  }
-
-  .nav-links {
-    align-items: flex-start;
-  }
-} */

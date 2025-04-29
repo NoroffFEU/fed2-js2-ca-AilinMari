@@ -60,8 +60,6 @@
   font-size: 0.8rem;
 }
 
-
-
 h1 {
   font-size: 1.2rem;
   font-weight: 300;
@@ -72,7 +70,6 @@ h1 {
 
 #updateProfileForm {
   display: none; /* Skjult som standard */
-
 }
 
 .update-profile-input {
@@ -85,7 +82,7 @@ h1 {
 
 #editProfileButton {
   height: 1.5rem;
-  width: 50%;
+  width: 80%;
   font-size: 1rem;
   font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
@@ -98,7 +95,8 @@ h1 {
   justify-self: center;
   margin: 1rem 0 0 0;
 }
-.updateButton, #follow-button {
+.updateButton,
+#follow-button {
   height: 1.5rem;
   width: 80%;
   font-size: 1rem;
@@ -128,7 +126,7 @@ h1 {
 .edit-post-button,
 .delete-post-button {
   height: 1.5rem;
-  width: 30%;
+  width: 100%;
   font-size: 1rem;
   font-family: "Raleway", sans-serif;
   background-color: #f0f0f0;
@@ -142,6 +140,49 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   margin: 2rem;
+  gap: 1rem;
+}
+
+#profileFeed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 2rem 0;
+}
+
+@media (min-width: 1000px) {
+  .container .image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+  }
+
+  .container .image-container img {
+    max-height: 100%;
+    max-width: 1000px;
+    object-fit: scale-down;
+    /* max-height: 20rem; */
+  }
+
+  .user-buttons {
+    /* max-width: 1000px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20rem;
+  }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  border: 1px solid rgba(255, 255, 255, 0.137);
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
+}
 }
