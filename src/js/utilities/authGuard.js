@@ -1,4 +1,4 @@
-const repoUrl = "/fed2-js2-ca-AilinMari"; // Get the base URL of the repository
+const repoUrl = "https://norofffeu.github.io/fed2-js2-ca-AilinMari"; // Get the base URL of the repository
 
 export function authGuard() {
   if (!localStorage.token) {
