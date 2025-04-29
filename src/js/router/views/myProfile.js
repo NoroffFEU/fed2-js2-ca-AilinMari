@@ -98,6 +98,9 @@ function renderPosts(posts) {
     content.textContent = post.body;
     content.className = "post-description";
 
+    const userButtons = document.createElement("div");
+    userButtons.className = "user-buttons";
+
     const editButton = document.createElement("button");
     editButton.textContent = "Edit Post";
     editButton.className = "edit-post-button";
@@ -127,8 +130,9 @@ function renderPosts(posts) {
     postContainer.appendChild(link);
     postContainer.appendChild(title);
     postContainer.appendChild(content);
-    postContainer.appendChild(editButton);
-    postContainer.appendChild(deleteButton);
+    postContainer.appendChild(userButtons);
+    userButtons.appendChild(editButton);
+    userButtons.appendChild(deleteButton);
     postGrid.appendChild(postContainer);
   });
 }
