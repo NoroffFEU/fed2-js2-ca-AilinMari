@@ -2,9 +2,31 @@ import { SocialApi } from "../../api/apiClient";
 
 let apiClient = new SocialApi();
 
+const url = new URL(window.location.href); // Get current page URL
+const postId = url.searchParams.get("id"); // Get postId from URL query parameters
 
-export async function updatePost(event) {
-    event.preventDefault(); // Prevent default form submission
+async function fetchPostData(postId) {
+    try {
+        const post = await apiClient.getPostById(postId);
+        console.log("Post data:", post.data); // Debugging line
+        populateFormFields(post.data);
+    } catch (error) {
+        console.error("Error fetching post data:", error);
+        alert("Failed to fetch post data. Please try again.");
+    }
+}
+
+function populateFormFields(post) {
+    document.getElementById("post-title").value = post.title;
+    document.getElementById("post-body").value = post.body;
+    if (post.media) {
+        document.getElementById("post-image-url").value = post.media.url || "";
+        document.getElementById("post-image-alt").value = post.media.alt || "Image";
+    }
+    document.getElementById("post-tags").value = post.tags ? post.tags.join(", ") : "";
+}
+
+export async function updatePost() {
     const token = localStorage.getItem("token");
     if (!token) {
         alert("You must be logged in to update a post.");
@@ -12,15 +34,10 @@ export async function updatePost(event) {
         return;
     }
 
-    const url = new URL(window.location.href); // Get current page URL
-    const postId = url.searchParams.get("id"); // Get postId from URL query parameters
-    console.log("Post ID:", postId); // Debugging line
-    
     if (!postId) {
         console.error("Post ID not found in the URL.");
         return;
     }
-
 
     const title = document.getElementById("post-title").value.trim();
     const body = document.getElementById("post-body").value.trim();
@@ -42,14 +59,18 @@ export async function updatePost(event) {
 
     try {
         // Send request to update post
-        const updatedPost = await apiClient.updatePost(title, body, tags, media);
+        const updatedPost = await apiClient.updatePost(postId, title, body, tags, media);
         console.log("Post updated successfully:", updatedPost);
 
         // Redirect to the updated post page
         window.location.href = "/post/?id=" + updatedPost.data.id;
-
     } catch (error) {
         console.error("Error updating post:", error);
         alert("Failed to update post. Please try again.");
     }
+}
+
+// Fetch and populate form fields when the page loads
+if (postId) {
+    fetchPostData(postId);
 }
