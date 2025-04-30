@@ -188,4 +188,9 @@ h1 {
     box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
     padding: 2rem 0;
   }
+  #view-posts-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
