@@ -17,8 +17,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* align-items: center; */
   height: 100%;
 }
+
 
 #storyfeed {
   display: flex;
@@ -391,14 +393,14 @@ form {
 
 form a {
   text-decoration: none;
-  color: #000;
+  color: pink;
   font-size: 1.2rem;
   padding: 0.5rem;
   font-family: "IBM plex Sans Condensed";
 }
 form a:hover {
   color: pink;
-  text-shadow: #000 2px 2px 3px;
+  text-shadow: pink 2px 2px 3px;
   border-radius: 5px;
 }
 
