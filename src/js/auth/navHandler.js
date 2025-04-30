@@ -1,6 +1,6 @@
 import { SocialApi } from "../api/apiClient.js";
 import { API_SOCIAL_POSTS, API_KEY } from "../api/constants";
-import { repoUrl } from "../api/constants.js";;
+import { repoUrl } from "../api/constants.js";
 
 const apiClient = new SocialApi();
 
@@ -8,8 +8,12 @@ const apiClient = new SocialApi();
 const token = localStorage.getItem("token");
 
 // Select the "Login" and "Register" links
-const loginLink = document.querySelector("a[href='/auth/login/']");
-const registerLink = document.querySelector("a[href='/auth/register/']");
+const loginLink = document.querySelector(
+  "a[href='https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/login/']"
+);
+const registerLink = document.querySelector(
+  "a[href='https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/register/']"
+);
 
 if (token) {
   // User is logged in, hide "Login" and "Register" links
@@ -19,7 +23,6 @@ if (token) {
   // User is not logged in, ensure "Login" and "Register" links are visible
   if (loginLink) loginLink.style.display = "block";
   if (registerLink) registerLink.style.display = "block";
-
 }
 
 const userLinks = document.querySelector("#user-links");
@@ -86,7 +89,9 @@ function renderSearchResults(posts) {
     link.classList.add("post-card");
     link.href = repoUrl + `post/?id=${post.id}`;
     link.innerHTML = `
-      <img src="${post.media.url}" alt="${post.media.alt || `${post.title}'s image`}" class="post-image" />
+      <img src="${post.media.url}" alt="${
+      post.media.alt || `${post.title}'s image`
+    }" class="post-image" />
       <h4>${post.title}</h4>
     `;
     resultsContainer.appendChild(link);
