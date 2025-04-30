@@ -1,5 +1,6 @@
 import { authGuard } from "../../utilities/authGuard.js";
 import { SocialApi } from "../../api/apiClient.js";
+import { repoUrl } from "../../api/constants.js";
 
 authGuard();
 
@@ -120,7 +121,7 @@ function renderPosts(posts) {
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = `../../post/?id=${post.id}`;
+    link.href = repoUrl + `/post/?id=${post.id}`;
 
     const img = document.createElement("img");
     img.src = post.media?.url;

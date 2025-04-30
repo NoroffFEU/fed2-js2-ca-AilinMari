@@ -1,7 +1,7 @@
 import { SocialApi } from "../../api/apiClient.js";
-
+import { repoUrl } from "../../api/constants.js"; // Import the repoUrl constant
 const apiClient = new SocialApi();
-const repoUrl = window.location.origin; // Get the base URL of the repository
+
 export async function createPost() {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -14,7 +14,7 @@ export async function createPost() {
   const user = await apiClient.getUser(token);
   if (!user) {
     alert("You must be logged in to create a post.");
-    window.location.href = "/auth/login/";
+    window.location.href = repoUrl + "/auth/login/";
     return;
   }
 }
@@ -40,7 +40,7 @@ if (form) {
       const createdPost = await apiClient.createPost(title, body, tags, media);
       console.log("Post created successfully:", createdPost);
 
-window.location.href = "/post/?id=" + createdPost.data.id; // Redirect to the new post page
+window.location.href = repoUrl + "/post/?id=" + createdPost.data.id; // Redirect to the new post page
 
       // Optional: Redirect to the homepage or the new post
       // window.location.href = `/post/?id=${createdPost.data.id}`;

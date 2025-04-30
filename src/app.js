@@ -1,4 +1,5 @@
 import "./css/style.css";
+import "./css/profile.css";
 
 import router from "./js/router";
 

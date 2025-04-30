@@ -84,7 +84,7 @@ function renderSearchResults(posts) {
   posts.forEach((post) => {
     const link = document.createElement("a");
     link.classList.add("post-card");
-    link.href = `../../post/?id=${post.id}`;
+    link.href = repoUrl + `post/?id=${post.id}`;
     link.innerHTML = `
       <img src="${post.media.url}" alt="${post.media.alt || `${post.title}'s image`}" class="post-image" />
       <h4>${post.title}</h4>

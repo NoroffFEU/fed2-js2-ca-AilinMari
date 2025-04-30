@@ -1,5 +1,5 @@
 import { SocialApi } from "../../api/apiClient";
-
+import { repoUrl } from "../../api/constants";
 let apiClient = new SocialApi();
 
 const url = new URL(window.location.href); // Get current page URL
@@ -30,7 +30,7 @@ export async function updatePost() {
     const token = localStorage.getItem("token");
     if (!token) {
         alert("You must be logged in to update a post.");
-        window.location.href = "/auth/login/"; // Redirect to login page
+        window.location.href = repoUrl + "/auth/login/"; // Redirect to login page
         return;
     }
 
@@ -63,7 +63,7 @@ export async function updatePost() {
         console.log("Post updated successfully:", updatedPost);
 
         // Redirect to the updated post page
-        window.location.href = "/post/?id=" + updatedPost.data.id;
+        window.location.href = repoUrl + "/post/?id=" + updatedPost.data.id;
     } catch (error) {
         console.error("Error updating post:", error);
         alert("Failed to update post. Please try again.");

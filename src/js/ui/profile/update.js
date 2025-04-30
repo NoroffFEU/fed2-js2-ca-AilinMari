@@ -1,6 +1,7 @@
 import { youStoryApi } from '../../api/apiClient.js'; // Correct relative path
-import { API_SOCIAL_PROFILES } from '../../api/constants.js'; // Correct relative path
+import { API_SOCIAL_PROFILES, repoUrl } from '../../api/constants.js'; // Correct relative path
 import { headers } from '../../api/headers.js';
+import { repoUrl } from '../../api/constants.js';
 
 const apiClient = new youStoryApi();
 
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const updatedProfile = await onUpdateProfile(data);
         console.log('Profile updated successfully:', updatedProfile);
         console.log('Profile updated successfully!');
-        window.location.href = '/profile/index.html'; // Redirect to the profile page after successful update
+        window.location.href = repoUrl + '/profile/index.html'; // Redirect to the profile page after successful update
       } catch (error) {
         console.log(error);
         console.log('Failed to update profile. Please try again.');

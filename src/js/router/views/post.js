@@ -1,5 +1,6 @@
 // alert('Single Post Page');
 import { SocialApi } from "../../api/apiClient.js";
+import { repoUrl } from "../../api/constants.js";
 import { authGuard } from "../../utilities/authGuard.js";
 let api = new SocialApi();
 authGuard();
@@ -29,7 +30,8 @@ function renderPost(post) {
   img.className = "post-image";
 
   const profileLink = document.createElement("a");
-  profileLink.href = `../../profile/view/?author=${post.data.author?.name}`;
+  profileLink.href =
+    repoUrl + `/profile/view/?author=${post.data.author?.name}`;
   profileLink.className = "profile-link";
 
   const postTitle = document.createElement("h1");
@@ -51,7 +53,7 @@ function renderPost(post) {
   profileLink.appendChild(author);
 
   userInfo.appendChild(profileLink);
-  
+
   postContainer.appendChild(userInfo);
   postContainer.appendChild(img);
   postContainer.appendChild(postTitle);
@@ -65,7 +67,6 @@ async function main() {
 }
 
 main();
-
 
 document.addEventListener("DOMContentLoaded", () => {
   getPostById();
