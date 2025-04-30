@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noroff FED2 JS2 CA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
+    <script type="module" crossorigin src="../../assets/register-BdHZTw8z.js"></script>
+    <link rel="modulepreload" crossorigin href="../../assets/logoutHandler-XduYXRLY.js">
+    <link rel="stylesheet" crossorigin href="../../assets/logoutHandler-1hoWPjf2.css">
+  </head>
+
+  <body>
+    <nav>
+      <!-- <button class="hamburger" aria-label="Toggle navigation">☰</button> -->
+      <div class="nav-links">
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+        <a href="/profile/me/">My Profile</a>
+        <a href="/auth/login/">Login</a>
+        <a href="/auth/register/">Register</a>
+      </div>
+    </nav>
+    <h1>Register</h1>
+
+    <form name="register" class="register-form">
+      <div>
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+          maxlength="20"
+          pattern="^[\w]+$"
+          title="Please enter a username using only letters and numbers"
+        />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+          title="Please enter a valid noroff.no or stud.noroff.no address"
+        />
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+          minlength="8"
+        />
+      </div>
+
+      <!-- <a href="/auth/login/">Login</a> -->
+      <button type="submit">Register</button>
+      <p class="registerFailed"></p>
+    </form>
+    <div id="user-links">
+      <div class="links">
+        <div class="searchbar">
+          <button id="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+          <input
+            type="text"
+            id="search"
+            placeholder="Search for posts..."
+            class="hidden"
+          />
+        </div>
+        <div id="search-results"></div>
+        <div class="create-sign"><a href="/post/create/">+</a></div>
+        <div class="home">
+          <a href="/"><i class="fas fa-home"></i></a>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div id="footer-content">
+        <p>© 2023 Youstory. All rights reserved.</p>
+        <p>Made with ❤️ by Noroff student</p>
+      </div>
+    </footer>
+  </body>
+</html>

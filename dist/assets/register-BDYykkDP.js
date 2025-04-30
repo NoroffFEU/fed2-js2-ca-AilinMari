@@ -1,0 +1,1 @@
+async function n(a){}const t=document.forms.register;t.addEventListener("submit",async a=>{a.preventDefault();const e=new FormData(t);e.get("name"),e.get("email"),e.get("password"),e.get("bio"),e.get("banner"),e.get("avatar"),await n()});

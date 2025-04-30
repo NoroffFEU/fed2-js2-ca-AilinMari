@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>yStory my profile</title>
+    <link rel="icon" type="image/png" href="/public/images/favicon-32x32.png" />
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/api/profile/update.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <script type="module" src="/src/js/auth/logoutHandler.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+      @import url("https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+        <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/profile/me/"
+          >My Profile</a
+        >
+        <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/login/"
+          >Login</a
+        >
+        <a
+          href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/register/"
+          >Register</a
+        >
+      </div>
+    </nav>
+    <main>
+      <div id="profileInfo">
+        <button id="editProfileButton" type="button">Edit Profile</button>
+      </div>
+
+      <form id="updateProfileForm" name="updateProfile">
+        <div class="update-profile-input">
+          <div class="profile-form-group">
+            <label for="avatar">Avatar URL</label>
+            <input id="avatar" type="url" name="avatar" />
+          </div>
+          <div class="profile-form-group">
+            <label for="banner">Banner URL</label>
+            <input id="banner" type="url" name="banner" />
+          </div>
+        </div>
+        <button class="updateButton" type="submit">Update Profile</button>
+      </form>
+      <div id="profileFeed"></div>
+      <div id="user-links">
+        <div class="links">
+          <div class="searchbar">
+            <button id="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search for posts..."
+              class="hidden"
+            />
+          </div>
+          <div id="search-results"></div>
+          <div class="create-sign">
+            <a
+              href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/post/create/"
+              >+</a
+            >
+          </div>
+          <div class="home">
+            <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/"
+              ><i class="fas fa-home"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div id="footer-content">
+        <p>© 2023 Youstory. All rights reserved.</p>
+        <p>Made with ❤️ by Noroff student</p>
+      </div>
+    </footer>
+  </body>
+</html>

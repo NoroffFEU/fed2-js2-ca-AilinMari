@@ -1,1 +1,477 @@
 @import url(_reset.css);
+@import url(profile.css);
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: pink;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#storyfeed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  margin-top: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.137);
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
+  padding: 0 0 1rem 0;
+}
+
+.container .post-image {
+  width: 100%;
+  max-width: 1000px;
+  object-fit: cover;
+  max-height: 20rem;
+}
+
+.container .user-avatar {
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  position: relative;
+  border: solid 0.2rem pink;
+  box-shadow: black 0px 0px 10px;
+}
+
+#single-post .user-info {
+  display: flex;
+  margin: 1rem 0 0 1rem;
+  gap: 0.5rem;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
+
+#single-post .profile-link {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+#single-post .user-info img {
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  position: relative;
+  border: solid 0.2rem pink;
+  box-shadow: black 0px 0px 10px;
+}
+
+#single-post h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+}
+
+.post-description {
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.post-title {
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.post-image {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.body-text {
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.author-container {
+  display: flex;
+  margin: 1rem 0 0 1rem;
+  gap: 0.5rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.textContentContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.textContentContainer p {
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 0.8rem;
+}
+
+.noroff-logo img {
+  width: 100%;
+  max-width: 10rem;
+}
+
+/* h1 {
+  font-size: 4rem;
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+} */
+a {
+  color: pink;
+  font-weight: 600;
+  text-decoration: none;
+}
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+}
+
+.or {
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  margin: 1rem 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: pink;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  font-family: "IBM plex Sans Condensed";
+}
+
+nav a:hover {
+  color: pink;
+  text-shadow: #000 2px 2px 3px;
+  border-radius: 5px;
+}
+
+nav a:active {
+  text-shadow: 3px 3px 6px #000;
+  color: pink;
+}
+
+nav {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+/* nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+} */
+
+button {
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 15rem;
+}
+
+button:hover {
+  background-color: rgb(255, 124, 146);
+  box-shadow: inset 1px 1px 3px #000;
+  box-shadow: 0px 3px 4px #000;
+}
+
+button:active {
+  box-shadow: inset 0px 3px 4px #000;
+  background-color: pink;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid pink;
+  border-radius: 4px;
+  max-width: 15rem;
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 1rem;
+}
+
+textarea {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 15rem;
+  border-radius: 4px;
+}
+
+form label {
+  font-size: 1.2rem;
+  font-family: "IBM plex Sans Condensed", sans-serif;
+  padding: 0 0 0.5rem 0;
+}
+
+#user-links {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: black; /* Optional: Add a background color */
+  z-index: 1000; /* Ensure it stays above other elements */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+  padding: 0.8rem 0 0.5rem 0; /* Add padding for spacing */
+}
+
+.hidden {
+  display: none;
+}
+
+.searchbar {
+  padding: 0rem;
+  margin: 0;
+}
+
+#user-links .links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.links .home {
+  justify-self: center;
+}
+
+.links .searchbar {
+  justify-self: center;
+}
+
+.links .create-sign {
+  justify-self: center;
+}
+
+#search {
+  font-size: 0.8rem;
+  border-radius: 5px;
+  border: none;
+  /* width: 65%; */
+}
+
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(10rem, 1fr)
+  ); /* Responsive grid layout */
+  position: fixed;
+  bottom: 3.8rem;
+  left: 0;
+  width: 100%;
+  background-color: black; /* Optional: Add a background color */
+  z-index: 1000; /* Ensure it stays above other elements */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+  padding: 0.5rem 0; /* Add padding for spacing */
+}
+
+#search-results h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Raleway", sans-serif;
+  margin: 0.5rem 0;
+}
+
+#search-results img {
+  max-width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+#search-results a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: start;
+  gap: 0.5rem;
+  margin: 0.5rem;
+  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem 0 1rem;
+  position: relative;
+  /* width: 100%; */
+}
+
+.links .home {
+  font-size: 1.7rem;
+}
+
+#search-button {
+  width: fit-content;
+  background-color: black;
+  color: pink;
+  font-size: 1.2rem;
+}
+
+.create-sign {
+  max-width: fit-content;
+  border: solid 0.155rem pink;
+  border-radius: 50%;
+  padding: 0 0.5rem;
+  font-weight: 600;
+  font-family: "sans-serif";
+  font-size: 2rem;
+  position: sticky;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  top: 3rem; /* Align it to the top */
+  left: 0; /* Align it to the left */
+  background-color: black; /* Add a background color to overlay content */
+  z-index: 1000; /* Ensure it appears above other content but below the hamburger */
+  padding: 1rem; /* Add padding for spacing */
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+}
+
+nav a,
+nav button {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-family: "IBM plex Sans Condensed", sans-serif;
+  font-weight: 300;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+form a {
+  text-decoration: none;
+  color: pink;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  font-family: "IBM plex Sans Condensed";
+}
+form a:hover {
+  color: pink;
+  text-shadow: pink 2px 2px 3px;
+  border-radius: 5px;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 1rem 0 4rem 0;
+  background-color: #000000; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: pink;
+  font-family: "IBM plex Sans Condensed", sans-serif;
+  font-size: 1rem;
+  margin: 5rem 0 0 0;
+  box-shadow: inset 0px 0px 15px 0px rgba(255, 255, 255, 0.1); /* Optional shadow for better visibility */
+}
+
+@media (min-width: 1000px) {
+
+  .container .post-image img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+  }
+
+  main {
+    margin-top: 2rem;
+  }
+
+  #user-links .links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .links .home {
+    justify-self: center;
+  }
+
+  .links .searchbar {
+    justify-self: center;
+  }
+
+  .links .create-sign {
+    justify-self: center;
+  }
+  nav {
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 4rem 0 4rem;
+  }
+}

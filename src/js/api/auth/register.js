@@ -1,8 +1,59 @@
-export async function register({
-  name,
-  email,
-  password,
-  bio,
-  banner,
-  avatar,
-}) {}
+import { API_AUTH_REGISTER } from "../constants.js";
+import { repoUrl } from "../constants.js";
+
+export async function register({ name, email, password }) {
+  try {
+    const payload = { name, email, password };
+
+    const response = await fetch(API_AUTH_REGISTER, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("API Error Response:", errorData); // Log the full API error response
+      const errorMessage =
+        errorData.errors && errorData.errors.length > 0
+          ? errorData.errors[0].message
+          : response.statusText;
+      throw new Error(`Registration failed: ${errorMessage}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error during registration:", error.message);
+    throw error;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const registerButton = document.querySelector("form");
+
+  registerButton.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      await register({ name, email, password });
+      // Redirect to login page after successful registration//
+      window.location.href = repoUrl + "/auth/login/";
+    } catch (error) {
+      // Display error message to the user
+      const registerFailed = document.querySelector(".registerFailed");
+      if (registerFailed) {
+        registerFailed.textContent =
+          error.message || "Registration failed. Please try again.";
+        registerFailed.style.color = "red";
+      }
+    }
+  });
+});

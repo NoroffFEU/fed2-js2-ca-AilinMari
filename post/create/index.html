@@ -1,16 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <title>yStory create post</title>
+    <link rel="icon" type="image/png" href="/public/images/favicon-32x32.png" />
     <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/auth/navHandler.js"></script>
+    <script type="module" src="/src/js/auth/logoutHandler.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
-    <h1>Create Post</h1>
+    <nav>
+      <div class="nav-links">
+        <div id="logout">
+          <button>Logout</button>
+        </div>
+        <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/profile/me/"
+          >My Profile</a
+        >
+        <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/login/"
+          >Login</a
+        >
+        <a
+          href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/register/"
+          >Register</a
+        >
+      </div>
+    </nav>
+    <main>
+      <div id="headline"><h1>Create Post</h1></div>
 
-    <form name="createPost">
-      <button>Create Post</button>
-    </form>
+      <form id="create-post-form">
+        <input id="post-title" placeholder="Title" required />
+        <textarea
+          id="post-body"
+          placeholder="Write your blog post here..."
+          required
+        ></textarea>
+        <input id="post-tags" placeholder="Tags (comma-separated)" />
+        <input id="post-image-url" placeholder="Image URL" />
+        <input id="post-image-alt" placeholder="Image description" />
+        <button type="submit">Create Post</button>
+      </form>
+
+      <div id="user-links">
+        <div class="links">
+          <div class="searchbar">
+            <button id="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search for posts..."
+              class="hidden"
+            />
+          </div>
+          <div id="search-results"></div>
+          <div class="create-sign">
+            <a
+              href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/post/create/"
+              >+</a
+            >
+          </div>
+          <div class="home">
+            <a href="https://norofffeu.github.io/fed2-js2-ca-AilinMari/"
+              ><i class="fas fa-home"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div id="footer-content">
+        <p>© 2023 Youstory. All rights reserved.</p>
+        <p>Made with ❤️ by Noroff student</p>
+      </div>
+    </footer>
   </body>
 </html>
