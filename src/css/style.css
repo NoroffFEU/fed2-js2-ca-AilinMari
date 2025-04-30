@@ -435,9 +435,6 @@ footer {
 }
 
 @media (min-width: 1000px) {
-  body {
-    height: fit-content;
-  }
 
   .container .post-image img {
     width: 100%;
