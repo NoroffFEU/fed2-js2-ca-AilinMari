@@ -1,4 +1,5 @@
 import { API_AUTH_REGISTER } from "../constants.js";
+import { repoUrl } from "../constants.js";
 
 export async function register({ name, email, password }) {
   try {
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       await register({ name, email, password });
       // Redirect to login page after successful registration//
-      window.location.href = "/auth/login/";
+      window.location.href = repoUrl + "/auth/login/";
     } catch (error) {
       // Display error message to the user
       const registerFailed = document.querySelector(".registerFailed");
