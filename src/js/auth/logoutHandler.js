@@ -1,4 +1,4 @@
-import { repoUrl } from "../api/constants.js";;
+import { repoUrl } from "../api/constants.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.querySelector("#logout");
