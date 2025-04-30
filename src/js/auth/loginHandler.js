@@ -1,6 +1,6 @@
 import { SocialApi } from "../api/apiClient.js";
 import { API_KEY } from "../api/constants.js";
-
+import { repoUrl } from "../api/constants.js"; // Import the repoUrl constant
 const apiClient = new SocialApi();
 
 document
@@ -16,15 +16,10 @@ document
       localStorage.setItem("token", data.accessToken);
       localStorage.setItem("name", data.name); // Store the logged-in user's name
 
-
-;
-
-      window.location.href = "/"; // Redirect to the main page after successful login
+      window.location.href = repoUrl + "/"; // Redirect to the main page after successful login
     } catch (error) {
       alert(
         error.message || "Login failed. Please check your username or password."
       );
     }
   });
-
-

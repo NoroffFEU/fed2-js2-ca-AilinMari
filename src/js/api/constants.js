@@ -17,3 +17,7 @@ export const API_SOCIAL = `${API_BASE_URL}/social`;
 export const API_SOCIAL_POSTS = `${API_BASE_URL}/social/posts`;
 
 export const API_SOCIAL_PROFILES = `${API_BASE_URL}/social/profiles`;
+
+
+
+export const repoUrl = "https://norofffeu.github.io/fed2-js2-ca-AilinMari";

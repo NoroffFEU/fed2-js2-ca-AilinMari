@@ -1,3 +1,5 @@
+import { repoUrl } from "../api/constants.js";;
+
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.querySelector("#logout");
 
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("avatar");
 
         // Redirect to the login page
-        window.location.href = "/auth/login/";
+        window.location.href = repoUrl + "/auth/login/";
       } catch (error) {
         console.error("Error during logout:", error.message);
       }
