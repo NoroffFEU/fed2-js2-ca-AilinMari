@@ -1,5 +1,7 @@
 import { authGuard } from "../../utilities/authGuard.js";
 import { SocialApi } from "../../api/apiClient.js";
+import { repoUrl } from "../../api/constants.js";
+
 // import { renderProfileInfo } from "../../api/profile/logedin.js";
 
 authGuard();
@@ -54,7 +56,6 @@ function renderProfile(profile) {
 
 renderProfile(profile);
 
-
 async function fetchAndRenderPosts(author) {
   try {
     const posts = await apiClient.getPostsByLoggedInUser(author);
@@ -83,7 +84,7 @@ function renderPosts(posts) {
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = `../../post/?id=${post.id}`;
+    link.href = repoUrl + repoUrl + `/post/?id=${post.id}`;
 
     const img = document.createElement("img");
     img.src = post.media.url;
@@ -111,14 +112,16 @@ function renderPosts(posts) {
     editButton.textContent = "Edit Post";
     editButton.className = "edit-post-button";
     editButton.onclick = () => {
-      window.location.href = `../../post/edit/?id=${post.id}`;
+      window.location.href = repoUrl + `/post/edit/?id=${post.id}`;
     };
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete Post";
     deleteButton.className = "delete-post-button";
     deleteButton.onclick = async () => {
-      const confirmDelete = confirm("Are you sure you want to delete this post?");
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this post?"
+      );
       if (confirmDelete) {
         try {
           await apiClient.deletePost(post.id);
@@ -130,7 +133,6 @@ function renderPosts(posts) {
         }
       }
     };
-
 
     imageContainer.appendChild(img);
     postContainer.appendChild(imageContainer);
