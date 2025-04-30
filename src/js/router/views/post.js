@@ -53,7 +53,6 @@ function renderPost(post) {
 
   profileLink.appendChild(avatar);
   profileLink.appendChild(author);
-
   userInfo.appendChild(profileLink);
   postContainer.appendChild(container);
   container.appendChild(userInfo);

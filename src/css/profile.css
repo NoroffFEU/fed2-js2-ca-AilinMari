@@ -162,7 +162,8 @@ h1 {
     text-align: left;
   }
 
-  .container .image-container img {
+  .container .image-container img,
+  #single-post #single-post img {
     max-height: 100%;
     max-width: 1000px;
     object-fit: scale-down;
