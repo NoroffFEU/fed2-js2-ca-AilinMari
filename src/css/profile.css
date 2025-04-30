@@ -24,7 +24,7 @@
   /* margin: 0 0rem 0 2rem; */
 }
 
-#headline h1{
+#headline h1 {
   font-family: "Raleway", sans-serif;
   font-size: 1.2rem;
   font-weight: 300;
@@ -168,11 +168,11 @@ h1 {
   margin: 0 0 2rem 0;
 }
 
-.user-info p {
+a .user-info p {
   font-weight: 600;
 }
 
-h1 .post-title {
+.post-title h1 {
   font-weight: 600;
 }
 
