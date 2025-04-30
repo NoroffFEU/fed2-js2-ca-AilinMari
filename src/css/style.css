@@ -1,24 +1,22 @@
 @import url(_reset.css);
 @import url(profile.css);
 
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: #000;
   color: pink;
-  /* margin: 5rem 10rem; */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Make the main content area grow to fill the available space */
 main {
   flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  height: 100%;
+  justify-content: center; 
 }
 
 #storyfeed {
