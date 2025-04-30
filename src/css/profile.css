@@ -144,7 +144,8 @@ h1 {
   gap: 1rem;
 }
 
-#profileFeed {
+#profileFeed,
+#singlePost {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,13 +177,13 @@ h1 {
     gap: 20rem;
   }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 1000px;
-  border: 1px solid rgba(255, 255, 255, 0.137);
-  box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid rgba(255, 255, 255, 0.137);
+    box-shadow: inset 0px 0px 15px rgba(255, 255, 255, 0.1);
+  }
 }
