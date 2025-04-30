@@ -168,6 +168,14 @@ h1 {
   margin: 0 0 2rem 0;
 }
 
+.user-info p {
+  font-weight: 600;
+}
+
+h1 .post-title {
+  font-weight: 600;
+}
+
 @media (min-width: 1000px) {
   .container .image-container {
     display: flex;
