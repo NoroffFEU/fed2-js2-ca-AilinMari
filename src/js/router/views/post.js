@@ -29,6 +29,8 @@ function renderPost(post) {
   img.alt = post.data.media?.alt;
   img.className = "post-image";
 
+  const container = document.createElement("div");
+  container.className = "container";
   const profileLink = document.createElement("a");
   profileLink.href =
     repoUrl + `/profile/view/?author=${post.data.author?.name}`;
@@ -53,11 +55,11 @@ function renderPost(post) {
   profileLink.appendChild(author);
 
   userInfo.appendChild(profileLink);
-
-  postContainer.appendChild(userInfo);
-  postContainer.appendChild(img);
-  postContainer.appendChild(postTitle);
-  postContainer.appendChild(postContent);
+  postContainer.appendChild(container);
+  container.appendChild(userInfo);
+  container.appendChild(img);
+  container.appendChild(postTitle);
+  container.appendChild(postContent);
 }
 
 async function main() {
