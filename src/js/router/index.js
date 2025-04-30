@@ -1,6 +1,8 @@
 // This function controls which JavaScript file is loaded on which page
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose
+
+import { repoUrl } from "../api/constants.js";
 export default async function router(pathname = window.location.pathname) {
   const repoFolderName = "fed2-js2-ca-AilinMari"; // Define the repo folder name
 
@@ -34,7 +36,7 @@ export default async function router(pathname = window.location.pathname) {
     case "/auth/register/":
       await import("./views/register.js");
       break;
-    case "./post/":
+    case repoUrl + "/post/":
       await import("./views/post.js");
       break;
     case "/post/edit/":
