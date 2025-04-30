@@ -228,6 +228,8 @@ form input,
   border: 1px solid pink;
   border-radius: 4px;
   max-width: 15rem;
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 1rem;
 }
 
 textarea {
