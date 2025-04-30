@@ -221,7 +221,7 @@ button:active {
 }
 
 form input,
-textarea {
+#post-body textarea {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -229,6 +229,13 @@ textarea {
   border-radius: 4px;
   max-width: 15rem;
 }
+
+#post-body textarea {
+  margin-bottom: 1rem;
+  font-family: "IBM Plex Serif", sans-serif;
+  font-size: 1rem;
+}
+
 form label {
   font-size: 1.2rem;
   font-family: "IBM plex Sans Condensed", sans-serif;
