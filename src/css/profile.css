@@ -145,7 +145,7 @@ h1 {
 }
 
 #profileFeed,
-#singlePost {
+#single-post {
   display: flex;
   flex-direction: column;
   justify-content: center;
