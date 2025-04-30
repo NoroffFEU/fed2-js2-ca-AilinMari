@@ -2,19 +2,13 @@ import { authGuard } from "../../utilities/authGuard.js";
 import { SocialApi } from "../../api/apiClient.js";
 import { repoUrl } from "../../api/constants.js";
 
-// import { renderProfileInfo } from "../../api/profile/logedin.js";
-
 authGuard();
 
 let apiClient = new SocialApi();
 
-// Extract the username from the URL query parameters
-
 const username = localStorage.getItem("name"); // Get the username from local storage
 
 const profile = await apiClient.getUserProfile(username);
-
-// console.log("profile", profile);
 
 function renderProfile(profile) {
   const profileContainer = document.getElementById("profileInfo");
@@ -38,13 +32,13 @@ function renderProfile(profile) {
   followersAndPostsContainer.className = "followers-posts-count";
 
   const postsCount = document.createElement("p");
-  postsCount.textContent = `Posts: ${profile.data._count.posts}`; // Assuming author object has postsCount property
+  postsCount.textContent = `Posts: ${profile.data._count.posts}`; // get the posts count from the profile data
 
   const followersCount = document.createElement("p");
-  followersCount.textContent = `Followers: ${profile.data._count.followers}`; // Assuming author object has followersCount property
+  followersCount.textContent = `Followers: ${profile.data._count.followers}`; // get the followers count from the profile data
 
   const followingCount = document.createElement("p");
-  followingCount.textContent = `Following: ${profile.data._count.following}`; // Assuming author object has followingCount property
+  followingCount.textContent = `Following: ${profile.data._count.following}`; // get the following count from the profile data
 
   profileContainer.appendChild(profileInfoContainer);
   profileInfoContainer.append(authorAvatar, authorName);
@@ -59,7 +53,6 @@ renderProfile(profile);
 async function fetchAndRenderPosts(author) {
   try {
     const posts = await apiClient.getPostsByLoggedInUser(author);
-    console.log("Fetched posts:", posts);
     renderPosts(posts.data);
   } catch (error) {
     console.error("Error fetching posts:", error);

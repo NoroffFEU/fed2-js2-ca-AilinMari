@@ -51,7 +51,7 @@ export class SocialApi {
     if (!accessToken) {
       throw new AuthError("User is not logged in");
     }
-    console.log("Access Token:", accessToken); // Log the token for debugging
+
     return accessToken;
   }
 
@@ -73,7 +73,7 @@ export class SocialApi {
           "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
         },
       };
-      console.log("username", username); // Debugging API URL
+
       return await this._request(url.toString(), options, "Error creating ");
     } catch (error) {
       console.error(error);
@@ -103,7 +103,6 @@ export class SocialApi {
         },
       };
 
-      console.log("Fetching profile for author:", author); // Debugging log
       return await this._request(
         url.toString(),
         options,
@@ -136,7 +135,6 @@ export class SocialApi {
         },
       };
 
-      console.log("Fetching posts by author:", author); // Debugging log
       return await this._request(
         url.toString(),
         options,
@@ -163,7 +161,6 @@ export class SocialApi {
     };
 
     // Rettet: Bruk username i loggen i stedet for author
-    console.log("Fetching posts by username:", username); // Debugging log
 
     return await this._request(
       url.toString(),
@@ -245,38 +242,38 @@ export class SocialApi {
     );
   }
 
-/**
- * Updates a blog post by ID.
- * @param {string} postId - The ID of the blog post.
- * @param {string} title - The title of the blog post.
- * @param {string} body - The body content.
- * @param {Array<string>} tags - Tags for the post.
- * @param {Object|null} media - The media object (contains url and alt text).
- * @returns {Promise<any>} The updated blog post data.
- */
-async updatePost(postId, title, body, tags, media) {
-  const accessToken = this._getRequiredAccessToken();
-  
-  // Prepare the data to send in the request body
-  const data = { title, body, tags, media };
+  /**
+   * Updates a blog post by ID.
+   * @param {string} postId - The ID of the blog post.
+   * @param {string} title - The title of the blog post.
+   * @param {string} body - The body content.
+   * @param {Array<string>} tags - Tags for the post.
+   * @param {Object|null} media - The media object (contains url and alt text).
+   * @returns {Promise<any>} The updated blog post data.
+   */
+  async updatePost(postId, title, body, tags, media) {
+    const accessToken = this._getRequiredAccessToken();
 
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-      "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-    },
-    body: JSON.stringify(data),
-  };
+    // Prepare the data to send in the request body
+    const data = { title, body, tags, media };
 
-  // Send the request to the API to update the post
-  return await this._request(
-    `${API_SOCIAL_POSTS}/${postId}`,  // The postId is in the URL
-    options,
-    "Error updating post"
-  );
-}
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
+      },
+      body: JSON.stringify(data),
+    };
+
+    // Send the request to the API to update the post
+    return await this._request(
+      `${API_SOCIAL_POSTS}/${postId}`, // The postId is in the URL
+      options,
+      "Error updating post"
+    );
+  }
 
   /**
    * Deletes a blog post by ID.
@@ -368,23 +365,6 @@ async updatePost(postId, title, body, tags, media) {
 
     return await this._request(url, options, "Error updating user profile");
   }
-  // async updateUserProfile(data) {
-  //   const username = localStorage.getItem("name"); // Get the username from local storage
-  //   const url = `${API_SOCIAL_PROFILES}/${username}`; // Construct the API URL
-  //   const accessToken = this._getRequiredAccessToken();
-
-  //   const options = {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${accessToken}`,
-  //       "X-Noroff-API-Key": `${API_KEY}`, // Include the API key
-  //     },
-  //     body: JSON.stringify(data),
-  //   };
-
-  //   return await this._request(url, options, "Error updating user profile");
-  // }
 
   /**
    * Follows a user by username.
@@ -418,7 +398,6 @@ async updatePost(postId, title, body, tags, media) {
         Authorization: `Bearer ${accessToken}`,
         "X-Noroff-API-Key": API_KEY,
       },
-      // Ingen body her heller
     };
 
     return await this._request(url, options, "Error unfollowing user");
@@ -439,7 +418,6 @@ async updatePost(postId, title, body, tags, media) {
         },
       };
 
-      console.log("Searching posts with query:", query);
       return await this._request(
         url.toString(),
         options,

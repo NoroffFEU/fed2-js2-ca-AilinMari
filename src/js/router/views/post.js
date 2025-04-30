@@ -63,7 +63,7 @@ function renderPost(post) {
 
 async function main() {
   const post = await getPostById();
-  console.log(post);
+
   renderPost(post);
 }
 

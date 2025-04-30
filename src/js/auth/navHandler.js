@@ -46,7 +46,7 @@ if (token) {
 const searchInput = document.getElementById("search");
 const searchButton = document.getElementById("search-button");
 const resultsContainer = document.getElementById("search-results");
-const searchbar = document.querySelector(".searchbar"); // Søkebaren som inneholder input og knapp
+const searchbar = document.querySelector(".searchbar"); // seachbar class
 
 let searchResultsVisible = false;
 let searchInputVisible = false;
@@ -108,14 +108,14 @@ function renderSearchResults(posts) {
 
 searchButton.addEventListener("click", handleSearch);
 
-// Enter-søk
+// Enter-search
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     handleSearch();
   }
 });
 
-// Legg til event listener for å lukke søkefeltet når du klikker utenfor
+// Close search results when clicking outside
 document.addEventListener("click", (event) => {
   if (!searchbar.contains(event.target)) {
     searchInput.classList.add("hidden");

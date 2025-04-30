@@ -14,8 +14,6 @@ const username = localStorage.getItem("name"); // Get the username from local st
 
 const profile = await apiClient.getUserProfile(username);
 
-console.log("profile", profile);
-
 function renderProfile(profile) {
   const profileContainer = document.getElementById("profileInfo");
 
@@ -51,7 +49,6 @@ function renderProfile(profile) {
 renderProfile(profile);
 
 const post = await apiClient.getAllPosts();
-console.log(post); // Debugging log
 
 function renderAllPosts(posts) {
   const postGrid = document.getElementById("storyfeed");
@@ -125,9 +122,9 @@ function renderAllPosts(posts) {
 }
 
 async function handleBlogpostsView() {
-  const blogposts = await apiClient.getAllPosts();
-  console.log(blogposts);
-  renderAllPosts(blogposts);
+  const posts = await apiClient.getAllPosts();
+
+  renderAllPosts(posts);
 }
 
 handleBlogpostsView();

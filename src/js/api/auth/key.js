@@ -1,5 +1,5 @@
-import { apiRequest } from '../apiClient.js';
-import { API_AUTH_KEY } from '../constants.js';
+import { apiRequest } from "../apiClient.js";
+import { API_AUTH_KEY } from "../constants.js";
 
 /**
  * Requests a new API key and stores it in localStorage.
@@ -9,20 +9,19 @@ import { API_AUTH_KEY } from '../constants.js';
  */
 
 export async function createApiKey() {
-	try {
-		const response = await apiRequest(API_AUTH_KEY, 'POST', {});
-		console.log('API key created successfully:', response);
+  try {
+    const response = await apiRequest(API_AUTH_KEY, "POST", {});
 
-		if (response && response.key) {
-			localStorage.setItem('noroffApiKey', response.key);
-			console.log('API key stored in localStorage:', response.key);
-		} else {
-			console.warn('API key response did not contain a key:', response);
-		}
 
-		return response;
-	} catch (error) {
-		console.error('Error creating API key:', error);
-		throw error;
-	}
+    if (response && response.key) {
+      localStorage.setItem("noroffApiKey", response.key);
+    } else {
+      console.warn("API key response did not contain a key:", response);
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Error creating API key:", error);
+    throw error;
+  }
 }

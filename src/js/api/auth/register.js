@@ -4,7 +4,6 @@ import { repoUrl } from "../constants.js";
 export async function register({ name, email, password }) {
   try {
     const payload = { name, email, password };
-    console.log("Sending payload:", payload); // Log the payload for debugging
 
     const response = await fetch(API_AUTH_REGISTER, {
       method: "POST",
