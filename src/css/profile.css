@@ -2,7 +2,6 @@
   width: 100%;
   max-width: 1000px;
   height: auto;
-  /* border-radius: 0.5rem; */
 }
 
 .thumbnail-grid {
@@ -21,7 +20,6 @@
   position: relative;
   border: solid 0.2rem pink;
   box-shadow: black 0px 0px 10px;
-  /* margin: 0 0rem 0 2rem; */
 }
 
 #headline h1 {
@@ -78,13 +76,12 @@
 h1 {
   font-size: 1.2rem;
   font-weight: 300;
-  /* font-style: italic; */
   font-family: "Raleway", sans-serif;
   margin: 0;
 }
 
 #updateProfileForm {
-  display: none; /* Skjult som standard */
+  display: none; /* hidden as standard */
 }
 
 .update-profile-input {
@@ -191,11 +188,10 @@ h1 {
     max-height: 100%;
     max-width: 1000px;
     object-fit: scale-down;
-    /* max-height: 20rem; */
   }
 
   .user-buttons {
-    /* max-width: 1000px; */
+
     display: flex;
     justify-content: center;
     align-items: center;

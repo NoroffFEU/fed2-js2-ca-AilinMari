@@ -444,7 +444,6 @@ footer {
 
   main {
     margin-top: 2rem;
-    /* width: fit-content; */
   }
 
   #user-links .links {
@@ -474,6 +473,5 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     margin: 0 4rem 0 4rem;
-    /* max-width: 1000px; */
   }
 }
