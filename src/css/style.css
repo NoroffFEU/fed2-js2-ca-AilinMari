@@ -444,4 +444,16 @@ footer {
   .links .create-sign {
     justify-self: center;
   }
+  nav {
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1000px;
+  }
 }
