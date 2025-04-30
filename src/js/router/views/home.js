@@ -1,6 +1,7 @@
 import { authGuard } from "../../utilities/authGuard";
 import { API_SOCIAL_POSTS, API_KEY } from "../../api/constants";
 import { SocialApi } from "../../api/apiClient";
+import { repoUrl } from "../../api/constants";
 // import { renderProfileInfo } from "../../api/profile/logedin.js";
 
 authGuard();
@@ -70,10 +71,10 @@ function renderAllPosts(posts) {
     postContainer.className = "container";
 
     const link = document.createElement("a");
-    link.href = `../../post/?id=${post.id}`;
+    link.href = repoUrl + `/post/?id=${post.id}`;
 
     const profileLink = document.createElement("a");
-    profileLink.href = `../../profile/view/?author=${post.author.name}`;
+    profileLink.href = repoUrl + `/profile/view/?author=${post.author.name}`;
     profileLink.className = "profile-link";
 
     const img = document.createElement("img");
