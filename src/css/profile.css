@@ -170,10 +170,11 @@ h1 {
 
 .user-info p {
   font-weight: 100;
+  font-family: "Raleway", sans-serif;
 }
 
 .post-title h1 {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 @media (min-width: 1000px) {
