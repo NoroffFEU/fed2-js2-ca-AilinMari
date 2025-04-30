@@ -15,6 +15,10 @@ const registerLink = document.querySelector(
   "a[href='https://norofffeu.github.io/fed2-js2-ca-AilinMari/auth/register/']"
 );
 
+const myProfile = document.querySelector(
+  "a[href='https://norofffeu.github.io/fed2-js2-ca-AilinMari/profile/me/']"
+);
+
 const logoutButton = document.querySelector("#logout");
 
 if (token) {
@@ -26,6 +30,7 @@ if (token) {
   if (loginLink) loginLink.style.display = "block";
   if (registerLink) registerLink.style.display = "block";
   if (logoutButton) logoutButton.style.display = "none";
+  if (myProfile) myProfile.style.display = "none";
 }
 
 const userLinks = document.querySelector("#user-links");
